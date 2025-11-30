@@ -10,6 +10,12 @@
                             <h6 class="text-white text-capitalize ps-3">Mahasiswa</h6>
                         </div>
                     </div>
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center mt-3 mx-3">
+                        <div class="input-group input-group-outline">
+                            <label class="form-label">Cari Mahasiswa...</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -27,10 +33,9 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Status KKN
                                         </th>
-                                        <th
+                                        {{-- <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Aksi</th>
-                                        <th class="text-secondary opacity-7"></th>
+                                            Aksi</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,17 +55,20 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $mahasiswa->email }}</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm bg-gradient-success">{{ $mahasiswa->status_kkn }}</span>
+                                                @if ($mahasiswa->status_kkn == 'Sudah Daftar')
+                                                    <span class="badge badge-sm bg-gradient-success">Sudah Daftar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Belum Daftar</span>
+                                                @endif
                                             </td>
-                                            <td class="align-middle text-center text-sm">
+                                            {{-- <td class="align-middle text-center text-sm">
                                                 <a href="">
                                                     <span class="badge badge-sm bg-gradient-success">Edit</span>
                                                 </a>
                                                 <a href="">
                                                     <span class="badge badge-sm bg-gradient-danger">Delete</span>
                                                 </a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

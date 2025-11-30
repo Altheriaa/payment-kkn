@@ -1,0 +1,250 @@
+@extends('layouts.app')
+
+@section('title', 'Riwayat Transaksi')
+
+@section('content')
+    <div class="container-fluid py-2 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                            <h4 class="text-white text-capitalize ps-3">Riwayat Transaksi</h4>
+                            <h6 class="text-white ps-3">Daftar semua transaksi pembayaran KKN Anda</h6>
+                        </div>
+                    </div>
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center mt-3 mx-3">
+                        <div class="input-group input-group-outline">
+                            <label class="form-label">Cari Transaksi...</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Mahasiswa</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            NIM</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Order ID</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Jenis KKN</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Jumlah</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Status</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Tanggal</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if($payments->isEmpty())
+                                        <tr>
+                                            <td colspan="6" class="text-center py-4">
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <h6 class="mb-0 text-sm">Belum ada transaksi</h6>
+                                                    <p class="text-xs text-secondary">Anda belum melakukan transaksi pembayaran
+                                                    </p>
+                                                    {{-- <a href="{{ route('mahasiswa.pembayaran') }}"
+                                                        class="btn btn-primary btn-sm mt-2">
+                                                        Daftar KKN Sekarang
+                                                    </a> --}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @else
+                                        @foreach($payments as $payment)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{ $payment->mahasiswa->nama }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{ $payment->mahasiswa->nim }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{ $payment->order_id }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $payment->jenis_kkn }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        Rp {{ number_format($payment->amount, 0, ',', '.') }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs text-center font-weight-bold mb-0">
+                                                        @if($payment->status == 'success')
+                                                            <span class="badge badge-sm bg-gradient-success">Berhasil</span>
+                                                        @elseif($payment->status == 'pending')
+                                                            <span class="badge badge-sm bg-gradient-warning">Pending</span>
+                                                        @elseif($payment->status == 'failed')
+                                                            <span class="badge badge-sm bg-gradient-danger">Gagal</span>
+                                                        @else
+                                                            <span class="badge badge-sm bg-gradient-secondary">-</span>
+                                                        @endif
+                                                    </p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    {{ $payment->created_at->format('d M Y, H:i') }}
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if ($payment->status == 'pending' && $payment->snap_token)
+                                                        <button class="btn bg-gradient-danger badge" disabled>
+                                                            Menunggu Pembayaran
+                                                        </button>
+                                                    @elseif($payment->status == 'failed')
+                                                        <form action="{{ route('admin.hapus.transaksi', $payment->id) }}" method="POST"
+                                                            style="display: inline-block;" class="text-xs font-weight-bold"
+                                                            id="hapusTransaksiForm">
+
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button type="submit"
+                                                                class="badge badge-sm bg-gradient-danger border-0 cursor-pointer">
+                                                                Hapus Transaksi
+                                                            </button>
+                                                        </form>
+                                                    @elseif($payment->status == 'success')
+                                                        <a href="{{ route('admin.cetak', ['id' => $payment->id]) }}"
+                                                            class="text-xs font-weight-bold" target="_blank">
+                                                            <span class="badge badge-sm bg-gradient-warning">Cetak Invoice</span>
+                                                        </a>
+                                                        <a href="{{ route('admin.cetak.pendaftaran', ['id' => $payment->id]) }}"
+                                                            class="text-xs font-weight-bold" target="_blank">
+                                                            <span class="badge badge-sm bg-gradient-success">Cetak Formulir</span>
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                            {{-- Pagination Links --}}
+                            <div
+                                class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                                {{-- {{ $pagination->links() }} --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('layouts.footer')
+
+    <!-- Midtrans Snap -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('midtrans.client_key') }}"></script>
+
+    {{-- SweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function bayarLagi(snapToken) {
+            snap.pay(snapToken, {
+                onSuccess: function (result) {
+                    alert('Pembayaran berhasil!');
+                    location.reload();
+                },
+                onPending: function (result) {
+                },
+                onError: function (result) {
+                    alert('Pembayaran gagal!');
+                },
+                onClose: function () {
+                    console.log('Popup ditutup');
+                }
+            });
+        }
+    </script>
+
+    {{-- error/success/warning handle sweet alert --}}
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-semibold',
+                    icon: 'icon-custom bg-transparent'
+                },
+                timer: 2000
+            });
+        @elseif (session('warning'))
+            Swal.fire({
+                icon: 'warning',
+                text: "{{ session('warning') }}",
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-semibold',
+                    icon: 'icon-custom bg-transparent'
+                },
+                timer: 2000
+            });
+        @endif
+
+        @if($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-bold',
+                    confirmButton: 'button-confirm px-6 py-2 rounded-xl text-white',
+                }
+            });
+        @endif
+    </script>
+
+    {{-- On Submit Hapus Transaksi--}}
+    <script>
+        document.getElementById('hapusTransaksiForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Konfirmasi Data',
+                text: 'Yakin ingin menghapus transaksi ini ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
+@endsection

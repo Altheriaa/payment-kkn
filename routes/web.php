@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CetakInvoice as AdminCetakInvoice;
+use App\Http\Controllers\Admin\CetakPendaftaran as AdminCetakPendaftaran;
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\HapusTransaksiController;
 use App\Http\Controllers\Admin\MahasiswaController;
+use App\Http\Controllers\Admin\RiwayatPendaftaranController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CetakInvoice;
@@ -54,11 +59,26 @@ Route::middleware(['auth.mahasiswa'])->prefix('mahasiswa')->group(function () {
 
 // Admin
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard.admin');
+    // Dashboard Admin
+    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
     // Route mahasiswa
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.admin');
+
+    // Riwayat Transaksi
+    Route::get('/riwayat-transaksi', [RiwayatPendaftaranController::class, 'riwayatTransaksi'])->name('admin.riwayat');
+
+    // Cetak Invoice
+    Route::get('/riwayat/cetak/{id}', [AdminCetakInvoice::class, 'cetakTransaksi']) // Sesuaikan Controller
+        ->name('admin.cetak');
+
+    // Cetak Form Pendaftaran
+    Route::get('/riwayat/cetak/pendaftaran/{id}', [AdminCetakPendaftaran::class, 'cetakPendaftaran']) // Sesuaikan Controller
+        ->name('admin.cetak.pendaftaran');
+
+    // Hapus Transaksi
+    Route::delete('/riwayat/hapus/{id}', [HapusTransaksiController::class, 'hapusTransaksi'])
+        ->name('admin.hapus.transaksi');
 });
 
 Route::get('/profile', function () {

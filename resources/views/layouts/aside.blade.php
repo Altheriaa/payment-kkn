@@ -12,29 +12,15 @@
     <hr class="horizontal dark mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-
-            {{-- Dashboard --}}
             @if (Auth()->user())
+                {{-- Admin Route Sidebar --}}
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard.admin') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
-                        href="{{ route('dashboard.admin') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.dashboard') }}">
                         <i class="material-symbols-rounded opacity-5">dashboard</i>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('mahasiswa.dashboard') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
-                        href="{{ route('mahasiswa.dashboard') }}">
-                        <i class="material-symbols-rounded opacity-5">dashboard</i>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-            @endif
-
-
-
-            @if (Auth()->user())
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('mahasiswa.admin') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('mahasiswa.admin') }}">
@@ -42,35 +28,51 @@
                         <span class="nav-link-text ms-1">Mahasiswa</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.riwayat') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.riwayat') }}">
+                        <i class="material-symbols-rounded opacity-5">receipt_long</i>
+                        <span class="nav-link-text ms-1">Riwayat Pendaftaran</span>
+                    </a>
+                </li>
+            @else
+                {{-- Mahasiswa Route Sidebar --}}
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('mahasiswa.dashboard') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('mahasiswa.dashboard') }}">
+                        <i class="material-symbols-rounded opacity-5">dashboard</i>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('mahasiswa.biodata.index') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('mahasiswa.biodata.index') }}">
+                        <i class="material-symbols-rounded opacity-5">app_registration</i>
+                        <span class="nav-link-text ms-1">Pendaftaran</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('mahasiswa.pembayaran') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('mahasiswa.pembayaran') }}">
+                        <i class="material-symbols-rounded opacity-5">payments</i>
+                        <span class="nav-link-text ms-1">Pembayaran</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('mahasiswa.riwayat') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('mahasiswa.riwayat') }}">
+                        <i class="material-symbols-rounded opacity-5">receipt_long</i>
+                        <span class="nav-link-text ms-1">Riwayat Pendaftaran</span>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('profile') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('profile') }}">
+                        <i class="material-symbols-rounded opacity-5">person</i>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li> --}}
             @endif
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('mahasiswa.biodata.index') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
-                    href="{{ route('mahasiswa.biodata.index') }}">
-                    <i class="material-symbols-rounded opacity-5">app_registration</i>
-                    <span class="nav-link-text ms-1">Pendaftaran</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('mahasiswa.pembayaran') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
-                    href="{{ route('mahasiswa.pembayaran') }}">
-                    <i class="material-symbols-rounded opacity-5">payments</i>
-                    <span class="nav-link-text ms-1">Pembayaran</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('mahasiswa.riwayat') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
-                    href="{{ route('mahasiswa.riwayat') }}">
-                    <i class="material-symbols-rounded opacity-5">receipt_long</i>
-                    <span class="nav-link-text ms-1">Riwayat Pendaftaran</span>
-                </a>
-            </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('profile') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
-                    href="{{ route('profile') }}">
-                    <i class="material-symbols-rounded opacity-5">person</i>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li> --}}
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">

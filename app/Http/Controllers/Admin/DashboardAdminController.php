@@ -1,14 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use App\Models\Mahasiswa;
+use App\Models\Payment;
+use Illuminate\Http\Request;
 
-class DashboardMahasiswaController extends Controller
+class DashboardAdminController extends Controller
 {
     public function index()
     {
+        // count mahasiswa
+        $mahasiswaCount = Mahasiswa::count();
+        $transaksiCount = Payment::count();
+
         $siakadApiUrl = 'https://mini-siakad.cloud/api/jadwal-kkn';
         // $secretKeySiakad = env('SYSTEM_API_KEY');
         $secretKeySiakad = 'starkey-aespo';
@@ -47,9 +54,14 @@ class DashboardMahasiswaController extends Controller
         } catch (\Exception $e) {
         }
 
-        return view('dashboard', [
+        $totalAktif = collect($jenisKknList)->where('is_active', true)->count();
+
+        return view('admin.dashboard', [
             'jadwal_kkn' => $jadwal_kkn,
             'jenisKknList' => $jenisKknList,
+            'mahasiswaCount' => $mahasiswaCount,
+            'totalAktif' => $totalAktif,
+            'transaksiCount' => $transaksiCount,
         ]);
     }
 }

@@ -203,6 +203,83 @@
                             </table>
                         </div>
                     </div>
+
+                    {{-- Table Biaya KKN --}}
+                    <div class="card-header pb-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-7">
+                                <h6>Biaya KKN</h6>
+                            </div>
+                            <div class="col-lg-6 col-5 my-auto text-end">
+                                <div class="dropdown float-lg-end pe-4">
+                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v text-secondary"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                action</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                else here</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Jenis KKN</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Biaya</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($jenisKknList as $jenis)
+                                        <tr>
+                                            {{-- Kolom Prodi --}}
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $jenis['nama_jenis'] }}
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-0 text-sm text">
+                                                    Rp {{ number_format($jenis['biaya']) }}
+                                                </h6>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($jenis['is_active'])
+                                                    <span class="badge badge-sm bg-gradient-success">Aktif</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-secondary">Nonaktif</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center text-secondary">
+                                                Tidak ada jenis KKN tersedia.
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -292,6 +369,7 @@
                 </div>
             </div>
         </div>
+        {{-- End Section Jadwal KKN dan Alur KKN --}}
 
         {{-- Footer --}}
         @include('layouts.footer')
