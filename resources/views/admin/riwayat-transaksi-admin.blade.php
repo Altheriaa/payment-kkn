@@ -13,11 +13,53 @@
                             <h6 class="text-white ps-3">Daftar semua transaksi pembayaran KKN Anda</h6>
                         </div>
                     </div>
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center mt-3 mx-3">
-                        <div class="input-group input-group-outline">
-                            <label class="form-label">Cari Transaksi...</label>
-                            <input type="text" class="form-control">
-                        </div>
+                    <div class="card-body p-3">
+                        <form action="{{ route('admin.riwayat') }}" method="GET">
+                            <div class="row g-2 align-items-center justify-content-end">
+
+                                {{-- Dropdown Status --}}
+                                <div class="col-12 col-md-5">
+                                    <div class="input-group input-group-static">
+                                        <select name="status" class="form-control px-2 border border-secondary"
+                                            style="height: 42px; border-radius: 8px !important;">
+                                            <option value="">Filter Berdasarkan...</option>
+                                            <option value="success" {{ request('status') == 'success' ? 'selected' : '' }}>
+                                                Berhasil</option>
+                                            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
+                                                Menunggu</option>
+                                            <option value="failed" {{ request('status') == 'failed' ? 'selected' : '' }}>Gagal
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- Tombol Filter & Reset (Di Mobile akan sejajar berdampingan) --}}
+                                <div class="col-8 col-md-2">
+                                    <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 42px;">
+                                        <i class="fas fa-filter me-1"></i> Filter
+                                    </button>
+                                </div>
+                                <div class="col-4 col-md-1">
+                                    <a href="{{ route('admin.riwayat') }}"
+                                        class="btn btn-outline-secondary w-100 mb-0 d-flex align-items-center justify-content-center"
+                                        style="height: 42px;" data-bs-toggle="tooltip" title="Reset Filter">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
+                                </div>
+
+                                {{-- Input Pencarian --}}
+                                <div class="col-12 col-md-4">
+                                    {{-- Tambahkan logic 'is-filled' agar label tidak menumpuk saat ada value --}}
+                                    <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }}">
+                                        <label class="form-label">Cari Transaksi...</label>
+                                        <input type="text" class="form-control" id="searchInput" name="search"
+                                            value="{{ request('search') }}" onfocus="focused(this)"
+                                            onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
@@ -47,107 +89,25 @@
                                             Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="table-body">
                                     @if($payments->isEmpty())
                                         <tr>
-                                            <td colspan="6" class="text-center py-4">
+                                            <td colspan="12" class="text-center py-4">
                                                 <div class="d-flex flex-column align-items-center">
-                                                    <h6 class="mb-0 text-sm">Belum ada transaksi</h6>
+                                                    <h6 class="mb-0 text-sm mt-4">Belum ada transaksi</h6>
                                                     <p class="text-xs text-secondary">Anda belum melakukan transaksi pembayaran
                                                     </p>
-                                                    {{-- <a href="{{ route('mahasiswa.pembayaran') }}"
-                                                        class="btn btn-primary btn-sm mt-2">
-                                                        Daftar KKN Sekarang
-                                                    </a> --}}
                                                 </div>
                                             </td>
                                         </tr>
                                     @else
-                                        @foreach($payments as $payment)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $payment->mahasiswa->nama }}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $payment->mahasiswa->nim }}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $payment->order_id }}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">{{ $payment->jenis_kkn }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        Rp {{ number_format($payment->amount, 0, ',', '.') }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs text-center font-weight-bold mb-0">
-                                                        @if($payment->status == 'success')
-                                                            <span class="badge badge-sm bg-gradient-success">Berhasil</span>
-                                                        @elseif($payment->status == 'pending')
-                                                            <span class="badge badge-sm bg-gradient-warning">Pending</span>
-                                                        @elseif($payment->status == 'failed')
-                                                            <span class="badge badge-sm bg-gradient-danger">Gagal</span>
-                                                        @else
-                                                            <span class="badge badge-sm bg-gradient-secondary">-</span>
-                                                        @endif
-                                                    </p>
-                                                </td>
-                                                <td class="align-middle text-center text-sm">
-                                                    {{ $payment->created_at->format('d M Y, H:i') }}
-                                                </td>
-                                                <td class="align-middle text-center text-sm">
-                                                    @if ($payment->status == 'pending' && $payment->snap_token)
-                                                        <button class="btn bg-gradient-danger badge" disabled>
-                                                            Menunggu Pembayaran
-                                                        </button>
-                                                    @elseif($payment->status == 'failed')
-                                                        <form action="{{ route('admin.hapus.transaksi', $payment->id) }}" method="POST"
-                                                            style="display: inline-block;" class="text-xs font-weight-bold"
-                                                            id="hapusTransaksiForm">
-
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button type="submit"
-                                                                class="badge badge-sm bg-gradient-danger border-0 cursor-pointer">
-                                                                Hapus Transaksi
-                                                            </button>
-                                                        </form>
-                                                    @elseif($payment->status == 'success')
-                                                        <a href="{{ route('admin.cetak', ['id' => $payment->id]) }}"
-                                                            class="text-xs font-weight-bold" target="_blank">
-                                                            <span class="badge badge-sm bg-gradient-warning">Cetak Invoice</span>
-                                                        </a>
-                                                        <a href="{{ route('admin.cetak.pendaftaran', ['id' => $payment->id]) }}"
-                                                            class="text-xs font-weight-bold" target="_blank">
-                                                            <span class="badge badge-sm bg-gradient-success">Cetak Formulir</span>
-                                                        </a>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        @include('admin.partials.transaksi-table')
                                     @endif
                                 </tbody>
                             </table>
                             {{-- Pagination Links --}}
-                            <div
-                                class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                                {{-- {{ $pagination->links() }} --}}
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $payments->links('vendor.pagination.bootstrap-4') }}
                             </div>
                         </div>
                     </div>
@@ -227,6 +187,7 @@
     </script>
 
     {{-- On Submit Hapus Transaksi--}}
+    {{--
     <script>
         document.getElementById('hapusTransaksiForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -244,6 +205,52 @@
                 if (result.isConfirmed) {
                     this.submit();
                 }
+            });
+        });
+    </script> --}}
+
+    {{-- Script Pencarian --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 1. Script Search (Sudah ada punya kamu)
+            $('#searchInput').on('keyup', function () {
+                let search = $(this).val();
+                $.ajax({
+                    url: "{{ route('admin.riwayat') }}",
+                    type: "GET",
+                    data: {
+                        search: search
+                    },
+                    success: function (response) {
+                        $('.table-body').html(response);
+                    }
+                });
+            });
+
+            // 2. Script Hapus dengan Event Delegation (PERBAIKAN)
+            // Kita pasang di 'document', memantau class '.form-hapus-transaksi'
+            $(document).on('submit', '.form-hapus-transaksi', function (e) {
+                e.preventDefault(); // Stop form submit asli
+
+                let form = this; // Simpan form yang sedang diklik
+
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: 'Yakin ingin menghapus transaksi ini? Data tidak bisa kembali.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Submit form secara manual setelah konfirmasi
+                        form.submit();
+                    }
+                });
             });
         });
     </script>

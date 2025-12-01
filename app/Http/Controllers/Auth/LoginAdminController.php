@@ -25,7 +25,7 @@ class LoginAdminController extends Controller
 
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard.admin')->with('success', 'Login berhasil.');
+            return redirect()->route('admin.dashboard')->with('success', 'Login berhasil.');
         }
         return back()->withErrors(['email' => 'Email atau Password salah'])->withInput();
     }

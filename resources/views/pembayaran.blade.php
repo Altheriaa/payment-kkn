@@ -120,7 +120,7 @@
 
                     <div class="col-12 text-end mt-4">
                       <button id="bayar-button" class="btn btn-success px-3">
-                        <i class="fas fa-credit-card"></i>Bayar
+                        <i class="fas fa-credit-card me-1"></i>Bayar
                       </button>
                     </div>
 
