@@ -10,11 +10,50 @@
                             <h6 class="text-white text-capitalize ps-3">Mahasiswa</h6>
                         </div>
                     </div>
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center mt-3 mx-3">
-                        <div class="input-group input-group-outline">
-                            <label class="form-label">Cari Mahasiswa...</label>
-                            <input type="text" class="form-control">
-                        </div>
+                    <div class="card-body p-3">
+                        <form action="{{ route('mahasiswa.admin') }}" method="GET">
+                            <div class="row g-2 align-items-center justify-content-end">
+
+                                {{-- Dropdown Status --}}
+                                <div class="col-12 col-md-5">
+                                    <div class="input-group input-group-static">
+                                        <select name="status_kkn" class="form-control px-2 border border-secondary"
+                                            style="height: 39px; border-radius: 8px !important;">
+                                            <option value="">Filter Berdasarkan...</option>
+                                            <option value="Sudah Daftar" {{ request('status_kkn') == 'Sudah Daftar' ? 'selected' : '' }}>
+                                                Sudah Daftar</option>
+                                            <option value="Belum Daftar" {{ request('status_kkn') == 'Belum Daftar' ? 'selected' : '' }}>
+                                                Belum Daftar</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- Tombol Filter & Reset (Di Mobile akan sejajar berdampingan) --}}
+                                <div class="col-8 col-md-2">
+                                    <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 39px;">
+                                        <i class="fas fa-filter me-1"></i> Filter
+                                    </button>
+                                </div>
+                                <div class="col-4 col-md-1">
+                                    <a href="{{ route('mahasiswa.admin') }}"
+                                        class="btn btn-outline-secondary w-100 mb-0 d-flex align-items-center justify-content-center"
+                                        style="height: 39px;" data-bs-toggle="tooltip" title="Reset Filter">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
+                                </div>
+
+                                {{-- Input Pencarian --}}
+                                <div class="col-12 col-md-4">
+                                    {{-- Tambahkan logic 'is-filled' agar label tidak menumpuk saat ada value --}}
+                                    <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }}">
+                                        <label class="form-label">Cari Transaksi...</label>
+                                        <input type="text" class="form-control" id="searchInput" name="search"
+                                            value="{{ request('search') }}" onfocus="focused(this)"
+                                            onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
@@ -33,46 +72,16 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Status KKN
                                         </th>
-                                        {{-- <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Aksi</th> --}}
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($mahasiswas as $mahasiswa)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $mahasiswa->nim }}</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $mahasiswa->nama }}</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $mahasiswa->email }}</p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                @if ($mahasiswa->status_kkn == 'Sudah Daftar')
-                                                    <span class="badge badge-sm bg-gradient-success">Sudah Daftar</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-gradient-danger">Belum Daftar</span>
-                                                @endif
-                                            </td>
-                                            {{-- <td class="align-middle text-center text-sm">
-                                                <a href="">
-                                                    <span class="badge badge-sm bg-gradient-success">Edit</span>
-                                                </a>
-                                                <a href="">
-                                                    <span class="badge badge-sm bg-gradient-danger">Delete</span>
-                                                </a>
-                                            </td> --}}
-                                        </tr>
-                                    @endforeach
+                                <tbody class="table-body">
+                                    @include('admin.partials.mahasiswa-table')
                                 </tbody>
                             </table>
+                            {{-- Pagination Links --}}
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $mahasiswas->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,4 +127,26 @@
             </div>
         </footer>
     </div>
+
+    {{-- Script Pencarian --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').on('keyup', function () {
+                let search = $(this).val();
+                let status = $('select[name="status_kkn"]').val();
+                $.ajax({
+                    url: "{{ route('mahasiswa.admin') }}",
+                    type: "GET",
+                    data: {
+                        search: search,
+                        status: status
+                    },
+                    success: function (response) {
+                        $('.table-body').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -131,7 +131,7 @@
               {{-- Jika sudah daftar --}}
             @else
               <div class="text-center alert alert-success p-4">
-                <i class="fas fa-check-circle me-2"></i>
+                <i class="fas fa-check-circle me-1 text-white"></i>
                 <strong class="text-white">Anda sudah terdaftar KKN.</strong>
               </div>
             @endif

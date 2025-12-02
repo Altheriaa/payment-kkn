@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CetakInvoice as AdminCetakInvoice;
 use App\Http\Controllers\Admin\CetakPendaftaran as AdminCetakPendaftaran;
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\HapusTransaksiController;
+use App\Http\Controllers\Admin\LaporanBulananController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\RiwayatPendaftaranController;
 use App\Http\Controllers\Auth\LoginAdminController;
@@ -79,6 +80,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Hapus Transaksi
     Route::delete('/riwayat/hapus/{id}', [HapusTransaksiController::class, 'hapusTransaksi'])
         ->name('admin.hapus.transaksi');
+
+    Route::get('/laporan-bulanan', [LaporanBulananController::class, 'index'])->name('admin.laporan.bulanan');
 });
 
 Route::get('/profile', function () {

@@ -8,11 +8,31 @@ use App\Models\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = Mahasiswa::query();
 
-        $mahasiswas = Mahasiswa::orderBy('created_at', 'desc')->paginate(10);
+        if (request()->filled('search')) {
+            $search = request()->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%$search%")
+                    ->orWhere('nim', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
+            });
+        }
 
-        return view('admin.mahasiswa', compact('mahasiswas'));
+        if ($request->filled('status_kkn')) {
+            $query->where('status_kkn', $request->status_kkn);
+        }
+
+        $mahasiswas = $query->orderBy('created_at', 'desc')->paginate(5);
+
+        if ($request->ajax()) {
+            return view('admin.partials.mahasiswa-table', compact('mahasiswas'))->render();
+        }
+
+        return view('admin.mahasiswa', [
+            'mahasiswas' => $mahasiswas
+        ]);
     }
 }

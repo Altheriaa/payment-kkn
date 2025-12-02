@@ -21,7 +21,7 @@
                                 <div class="col-12 col-md-5">
                                     <div class="input-group input-group-static">
                                         <select name="status" class="form-control px-2 border border-secondary"
-                                            style="height: 42px; border-radius: 8px !important;">
+                                            style="height: 39px; border-radius: 8px !important;">
                                             <option value="">Filter Berdasarkan...</option>
                                             <option value="success" {{ request('status') == 'success' ? 'selected' : '' }}>
                                                 Berhasil</option>
@@ -35,14 +35,14 @@
 
                                 {{-- Tombol Filter & Reset (Di Mobile akan sejajar berdampingan) --}}
                                 <div class="col-8 col-md-2">
-                                    <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 42px;">
+                                    <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 39px;">
                                         <i class="fas fa-filter me-1"></i> Filter
                                     </button>
                                 </div>
                                 <div class="col-4 col-md-1">
                                     <a href="{{ route('admin.riwayat') }}"
                                         class="btn btn-outline-secondary w-100 mb-0 d-flex align-items-center justify-content-center"
-                                        style="height: 42px;" data-bs-toggle="tooltip" title="Reset Filter">
+                                        style="height: 39px;" data-bs-toggle="tooltip" title="Reset Filter">
                                         <i class="fas fa-undo"></i>
                                     </a>
                                 </div>
@@ -107,7 +107,7 @@
                             </table>
                             {{-- Pagination Links --}}
                             <div class="d-flex justify-content-center mt-4">
-                                {{ $payments->links('vendor.pagination.bootstrap-4') }}
+                                {{ $payments->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
                             </div>
                         </div>
                     </div>
@@ -118,12 +118,14 @@
     @include('layouts.footer')
 
     <!-- Midtrans Snap -->
+    {{--
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{ config('midtrans.client_key') }}"></script>
+        data-client-key="{{ config('midtrans.client_key') }}"></script> --}}
 
     {{-- SweetAlert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{--
     <script>
         function bayarLagi(snapToken) {
             snap.pay(snapToken, {
@@ -141,7 +143,7 @@
                 }
             });
         }
-    </script>
+    </script> --}}
 
     {{-- error/success/warning handle sweet alert --}}
     <script>
@@ -186,29 +188,6 @@
         @endif
     </script>
 
-    {{-- On Submit Hapus Transaksi--}}
-    {{--
-    <script>
-        document.getElementById('hapusTransaksiForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            Swal.fire({
-                title: 'Konfirmasi Data',
-                text: 'Yakin ingin menghapus transaksi ini ?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                }
-            });
-        });
-    </script> --}}
-
     {{-- Script Pencarian --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -216,11 +195,14 @@
             // 1. Script Search (Sudah ada punya kamu)
             $('#searchInput').on('keyup', function () {
                 let search = $(this).val();
+                let status = $('select[name="status"]').val();
                 $.ajax({
                     url: "{{ route('admin.riwayat') }}",
                     type: "GET",
                     data: {
-                        search: search
+                        search: search,
+                        status: status
+
                     },
                     success: function (response) {
                         $('.table-body').html(response);
