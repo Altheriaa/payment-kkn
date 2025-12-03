@@ -115,7 +115,6 @@
             </div>
         </div>
     </div>
-    @include('layouts.footer')
 
     <!-- Midtrans Snap -->
     {{--

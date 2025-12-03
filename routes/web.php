@@ -81,7 +81,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/riwayat/hapus/{id}', [HapusTransaksiController::class, 'hapusTransaksi'])
         ->name('admin.hapus.transaksi');
 
-    Route::get('/laporan-bulanan', [LaporanBulananController::class, 'index'])->name('admin.laporan.bulanan');
+    // Laporan Bulanan
+    Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');
+
+    // Cetak Laporan Bulanan
+    Route::get('/laporan-bulanan/cetak/{bulan}/{tahun}', [LaporanBulananController::class, 'cetakLaporanBulanan'])
+        ->name('admin.cetak.laporan');
 });
 
 Route::get('/profile', function () {
