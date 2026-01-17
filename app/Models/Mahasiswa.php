@@ -12,8 +12,12 @@ class Mahasiswa extends Model
         'id',
         'nim',
         'nama',
+        'fakultas',
+        'prodi',
         'email',
+        'jumlah_sks',
         'status_kkn',
+
         //biodata
         'no_hp',
         'no_hp_darurat',

@@ -34,7 +34,7 @@ class LoginController extends Controller
         // cek jika gagal
         if ($response->failed()) {
             return back()->withErrors([
-                'nim' => 'NIM atau Password salah (data dari Siakad).',
+                'nim' => 'NIM atau Password salah.',
             ]);
         }
 
@@ -45,9 +45,12 @@ class LoginController extends Controller
         Mahasiswa::updateOrCreate(
             ['id' => $userDataFromApi['id']], // Kunci pencarian
             [
-                'nim' => $userDataFromApi['nim'], // Data untuk di-update/create
+                'nim' => $userDataFromApi['nim'],
                 'nama' => $userDataFromApi['name'],
                 'email' => $userDataFromApi['email'],
+                'jumlah_sks' => $userDataFromApi['jumlah_sks'],
+                'fakultas' => $userDataFromApi['fakultas']['nama_fakultas'] ?? null,
+                'prodi' => $userDataFromApi['prodi']['nama_prodi'] ?? null,
             ]
         );
 
