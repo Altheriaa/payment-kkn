@@ -96,14 +96,12 @@
         <div class="row mt-4 mb-4">
             <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
                 <div class="card">
+
+                    {{-- Jadwal KKN --}}
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6 col-7">
                                 <h6>Jadwal KKN</h6>
-                                <p class="text-sm mb-0">
-                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">Program Studi</span> Yang Dibuka
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -113,9 +111,6 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Program Studi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Tahun Akademik</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -131,25 +126,16 @@
                                 <tbody>
                                     @forelse ($jadwal_kkn as $jadwal)
                                         <tr>
-                                            {{-- Kolom Prodi --}}
+                                            {{-- Kolom Tahun Akademik (INI PERBAIKANNYA) --}}
                                             <td>
-                                                <div class="d-flex px-2 py-1">
+                                                <div class="d-flex px-2 py-1 ps-3">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">
-                                                            {{-- $jadwal['prodi']['nama_prodi'] (Ini sudah benar) --}}
-                                                            {{ $jadwal['prodi']['nama_prodi'] ?? 'Prodi T/A' }}
+                                                            {{ $jadwal['tahun_akademik']['tahun'] ?? '' }}
+                                                            ({{ $jadwal['tahun_akademik']['semester'] ?? 'N/A' }})
                                                         </h6>
                                                     </div>
                                                 </div>
-                                            </td>
-
-                                            {{-- Kolom Tahun Akademik (INI PERBAIKANNYA) --}}
-                                            <td>
-                                                <h6 class="mb-0 text-sm text">
-                                                    {{-- Key-nya adalah 'tahun' dan 'semester', bukan 'nama_tahun' --}}
-                                                    {{ $jadwal['tahun_akademik']['tahun'] ?? '' }}
-                                                    ({{ $jadwal['tahun_akademik']['semester'] ?? 'N/A' }})
-                                                </h6>
                                             </td>
 
                                             {{-- Kolom Tanggal Dibuka (Ini sudah benar) --}}

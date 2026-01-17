@@ -35,4 +35,13 @@ class MahasiswaController extends Controller
             'mahasiswas' => $mahasiswas
         ]);
     }
+
+    public function detail($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        return view('admin.lihat-detail-mahasiswa', [
+            'mahasiswa' => $mahasiswa
+        ]);
+    }
 }

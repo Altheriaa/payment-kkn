@@ -20,13 +20,10 @@
                 <span class="badge badge-sm bg-gradient-danger">Belum Daftar</span>
             @endif
         </td>
-        {{-- <td class="align-middle text-center text-sm">
-            <a href="">
-                <span class="badge badge-sm bg-gradient-success">Edit</span>
+        <td class="align-middle text-center text-sm">
+            <a href={{ route('mahasiswa.detail', $mahasiswa->id) }}>
+                <span class="badge badge-sm bg-gradient-success">Lihat Detail</span>
             </a>
-            <a href="">
-                <span class="badge badge-sm bg-gradient-danger">Delete</span>
-            </a>
-        </td> --}}
+        </td>
     </tr>
 @endforeach

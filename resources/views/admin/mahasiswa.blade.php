@@ -73,6 +73,10 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Status KKN
                                         </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Aksi
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">

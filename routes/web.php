@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MidtransWebhookController;
 use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
+use App\Http\Controllers\Mahasiswa\ProfileController;
 
 // login mahasiswa
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -56,6 +57,9 @@ Route::middleware(['auth.mahasiswa'])->prefix('mahasiswa')->group(function () {
     // Cetak Form Pendaftaran
     Route::get('/riwayat/cetak/pendaftaran/{id}', [CetakPendaftaran::class, 'cetakPendaftaran']) // Sesuaikan Controller
         ->name('mahasiswa.cetak.pendaftaran');
+
+    //Profil Mahasiswa
+    Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
 });
 
 // Admin
@@ -65,6 +69,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Route mahasiswa
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.admin');
+
+    // Lihat Detail Mahasiswa 
+    Route::get('mahasiswa/detail/{id}', [MahasiswaController::class, 'detail'])->name('mahasiswa.detail');
 
     // Riwayat Transaksi
     Route::get('/riwayat-transaksi', [RiwayatPendaftaranController::class, 'riwayatTransaksi'])->name('admin.riwayat');
@@ -85,15 +92,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');
 
     // Cetak Laporan Bulanan
-    Route::get('/laporan-bulanan/cetak/{bulan}/{tahun}', [LaporanBulananController::class, 'cetakLaporanBulanan'])
-        ->name('admin.cetak.laporan');
+    // Route::get('/laporan-bulanan/cetak/{bulan}/{tahun}', [LaporanBulananController::class, 'cetakLaporanBulanan'])
+    //     ->name('admin.cetak.laporan');
 });
-
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
-
-
-Route::get('/cek', function () {
-    return view('cek');
-})->name('cek');
