@@ -79,6 +79,10 @@
                 <td>{{ $mahasiswa->nim }}</td>
             </tr>
             <tr>
+                <td class="label">Fakultas</td>
+                <td>{{ session('mahasiswa_data.fakultas.nama_fakultas') }}</td>
+            </tr>
+            <tr>
                 <td class="label">Program Studi</td>
                 <td>{{ session('mahasiswa_data.prodi.nama_prodi') }}</td>
             </tr>
