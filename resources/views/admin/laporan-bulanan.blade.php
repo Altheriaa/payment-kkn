@@ -46,7 +46,7 @@
                                 {{-- Tombol Filter --}}
                                 <div class="col-6 col-md-2">
                                     <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 39px;">
-                                        <i class="fas fa-search me-1"></i> Filter
+                                        <i class="material-symbols-rounded text-sm me-1">search</i> Filter
                                     </button>
                                 </div>
 
@@ -55,7 +55,7 @@
                                     <a href="{{ route('admin.cetak.laporan', ['bulan' => $bulanDipilih, 'tahun' => $tahunDipilih]) }}"
                                         class="btn btn-outline-danger w-100 mb-0 d-flex align-items-center justify-content-center"
                                         style="height: 39px;" target="_blank">
-                                        <i class="fas fa-file-pdf me-1"></i> Cetak PDF
+                                        <i class="material-symbols-rounded text-sm me-1">picture_as_pdf</i> Cetak PDF
                                     </a>
                                 </div>
                             </div>

@@ -114,7 +114,7 @@
                                                     <!-- Tombol Submit -->
                                                     <div class="col-12 text-end mt-4">
                                                         <button type="submit" class="btn btn-primary px-3">
-                                                            <i class="fas fa-save text-white me-2"></i>Simpan Biodata
+                                                            <i class="material-symbols-rounded text-white me-2">save</i>Simpan Biodata
                                                         </button>
                                                     </div>
                                                 </div>
@@ -232,7 +232,7 @@
                                                     <!-- Tombol Submit -->
                                                     <div class="col-12 text-end mt-4">
                                                         <button type="submit" class="btn btn-primary px-3 text-white" disabled>
-                                                            <i class="fas fa-save text-white me-2"></i>Simpan Biodata
+                                                            <i class="material-symbols-rounded text-white me-2">save</i>Simpan Biodata
                                                         </button>
                                                     </div>
                                                 </div>

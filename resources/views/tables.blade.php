@@ -259,7 +259,7 @@
                     </td>
                     <td class="align-middle">
                       <button class="btn btn-link text-secondary mb-0">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
+                        <i class="material-symbols-rounded text-xs">more_vert</i>
                       </button>
                     </td>
                   </tr>
@@ -294,7 +294,7 @@
                     </td>
                     <td class="align-middle">
                       <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
+                        <i class="material-symbols-rounded text-xs">more_vert</i>
                       </button>
                     </td>
                   </tr>
@@ -329,7 +329,7 @@
                     </td>
                     <td class="align-middle">
                       <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
+                        <i class="material-symbols-rounded text-xs">more_vert</i>
                       </button>
                     </td>
                   </tr>
@@ -364,7 +364,7 @@
                     </td>
                     <td class="align-middle">
                       <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
+                        <i class="material-symbols-rounded text-xs">more_vert</i>
                       </button>
                     </td>
                   </tr>
@@ -399,7 +399,7 @@
                     </td>
                     <td class="align-middle">
                       <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
+                        <i class="material-symbols-rounded text-xs">more_vert</i>
                       </button>
                     </td>
                   </tr>
@@ -434,7 +434,7 @@
                     </td>
                     <td class="align-middle">
                       <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
+                        <i class="material-symbols-rounded text-xs">more_vert</i>
                       </button>
                     </td>
                   </tr>
@@ -454,7 +454,7 @@
               <script>
                 document.write(new Date().getFullYear())
               </script>,
-              made with <i class="fa fa-heart"></i> by
+              made with <i class="material-symbols-rounded">favorite</i> by
               <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
               for a better web.
             </div>

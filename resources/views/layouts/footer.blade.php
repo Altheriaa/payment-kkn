@@ -7,7 +7,7 @@
                     <script>
                         document.write(new Date().getFullYear())
                     </script>,
-                    made with <i class="fa fa-heart"></i> by
+                    made with <i class="material-symbols-rounded">favorite</i> by
                     <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Altheria</a>
                     for a better web.
                 </div>

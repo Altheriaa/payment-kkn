@@ -32,14 +32,14 @@
                                 {{-- Tombol Filter & Reset (Di Mobile akan sejajar berdampingan) --}}
                                 <div class="col-8 col-md-2">
                                     <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 39px;">
-                                        <i class="fas fa-filter me-1"></i> Filter
+                                        <i class="material-symbols-rounded text-sm me-1">filter_alt</i> Filter
                                     </button>
                                 </div>
                                 <div class="col-4 col-md-1">
                                     <a href="{{ route('mahasiswa.admin') }}"
                                         class="btn btn-outline-secondary w-100 mb-0 d-flex align-items-center justify-content-center"
                                         style="height: 39px;" data-bs-toggle="tooltip" title="Reset Filter">
-                                        <i class="fas fa-undo"></i>
+                                        <i class="material-symbols-rounded text-sm">undo</i>
                                     </a>
                                 </div>
 
@@ -102,7 +102,7 @@
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>,
-                            made with <i class="fa fa-heart"></i> by
+                            made with <i class="material-symbols-rounded text-sm">favorite</i> by
                             <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
                             for a better web.
                         </div>

@@ -38,7 +38,7 @@
                     <div class="card h-100 shadow-sm border">
                         <div class="card-header pb-0 p-3 bg-transparent">
                             <div class="d-flex align-items-center">
-                                <i class="fas fa-user-graduate text-primary me-2 text-lg"></i>
+                                <i class="material-symbols-rounded text-primary me-2 text-lg">school</i>
                                 <h6 class="mb-0">Informasi Akademik & Pribadi</h6>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                     <div class="card h-100 shadow-sm border">
                         <div class="card-header pb-0 p-3 bg-transparent">
                             <div class="d-flex align-items-center">
-                                <i class="fas fa-tools text-primary me-2 text-lg"></i>
+                                <i class="material-symbols-rounded text-primary me-2 text-lg">build</i>
                                 <h6 class="mb-0">Biodata & Perlengkapan KKN</h6>
                             </div>
                         </div>

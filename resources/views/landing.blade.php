@@ -56,8 +56,8 @@
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
               <ul class="navbar-nav navbar-nav-hover ms-auto">
                 <li class="nav-item d-flex align-items-center">
-                  <a href="{{ route('login') }}" target="_blank"
-                    role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                  <a href="{{ route('login') }}" target="_blank" role="button"
+                    class="nav-link ps-2 d-flex cursor-pointer align-items-center">
                     Login
                   </a>
                 </li>
@@ -1406,7 +1406,7 @@
                 <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank"
                   class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
                   Get Started
-                  <i class="fas fa-arrow-right ms-1"></i>
+                  <i class="material-symbols-rounded ms-1">arrow_forward</i>
                 </a>
               </div>
             </div>
@@ -1466,7 +1466,7 @@
                 <a href="https://secure.avangate.com/order/checkout.php?PRODS=36908422&OPTIONS36908422=COMPANY&CART=2&CARD=2&CLEAN_CART=2&SHORT_FORM=1&DESIGN_TYPE=2"
                   target="_blank" class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
                   Buy Premium
-                  <i class="fas fa-arrow-right ms-1"></i>
+                  <i class="material-symbols-rounded ms-1">arrow_forward</i>
                 </a>
               </div>
             </div>
@@ -1527,7 +1527,7 @@
                 <a href="https://secure.avangate.com/order/checkout.php?PRODS=19665215&OPTIONS19665215=COMPANY&CART=2&CLEAN_CART=2&CURRENCY=USD&DCURRENCY=USD&LANG=en&CARD=2&PAY_TYPE=CCVISAMC&SHORT_FORM=1&DESIGN_TYPE=2"
                   target="_blank" class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
                   Buy Bundle
-                  <i class="fas fa-arrow-right ms-1"></i>
+                  <i class="material-symbols-rounded ms-1">arrow_forward</i>
                 </a>
               </div>
             </div>
@@ -1565,19 +1565,19 @@
               <h6 class="text-secondary font-weight-normal pe-3">Interested in working with the designer files? No
                 worries, we've prepared a special Figma version of the product!</h6>
               <div class="justify-content-start d-flex px-2 py-1">
-                <i class="fas fa-check text-dark opacity-6 text-sm"></i>
+                <i class="material-symbols-rounded text-dark opacity-6 text-sm">check</i>
                 <div class="ps-2">
                   <span class="text-sm">3,800+ Duplicates</span>
                 </div>
               </div>
               <div class="justify-content-start d-flex px-2 py-1">
-                <i class="fas fa-check text-dark opacity-6 text-sm"></i>
+                <i class="material-symbols-rounded text-dark opacity-6 text-sm">check</i>
                 <div class="ps-2">
                   <span class="text-sm">100+ Components</span>
                 </div>
               </div>
               <div class="justify-content-start d-flex px-2 py-1">
-                <i class="fas fa-check text-dark opacity-6 text-sm"></i>
+                <i class="material-symbols-rounded text-dark opacity-6 text-sm">check</i>
                 <div class="ps-2">
                   <span class="text-sm">Autolayout</span>
                 </div>
@@ -1695,7 +1695,7 @@
                   <a class="position-absolute bottom-0 mb-4 text-white"
                     href="https://www.creative-tim.com/courses/fundamentals-ui-ux?ref=md-campaign">
                     View details
-                    <i class="fas fa-chevron-right text-xs ms-1"></i>
+                    <i class="material-symbols-rounded text-xs ms-1">chevron_right</i>
                   </a>
                 </div>
                 <img class="w-50" src="../assets/img/campaign/book.png" alt="book">
@@ -1725,7 +1725,7 @@
                 </p>
                 <a class="text-white" href="https://www.creative-tim.com/blog?ref=md-campaign" target="_blank">
                   Explore more articles
-                  <i class="fas fa-chevron-right text-xs ms-1"></i>
+                  <i class="material-symbols-rounded text-xs ms-1">chevron_right</i>
                 </a>
               </div>
             </div>
@@ -1749,11 +1749,11 @@
               <ol class="justify-content-start ps-0">
                 <button class="btn bg-white border rounded-circle py-2 px-3" data-bs-target="#carouselTestimonials"
                   data-bs-slide-to="0">
-                  <i class="fas fa-chevron-left"></i>
+                  <i class="material-symbols-rounded">chevron_left</i>
                 </button>
                 <button class="btn bg-white border rounded-circle py-2 px-3" data-bs-target="#carouselTestimonials"
                   data-bs-slide-to="1">
-                  <i class="fas fa-chevron-right"></i>
+                  <i class="material-symbols-rounded">chevron_right</i>
                 </button>
               </ol>
               <div class="carousel-inner">
@@ -1881,8 +1881,8 @@
                     data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
                     aria-controls="collapseOne">
                     What is Material Dashboard?
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
-                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>
+                    <i class="collapse-close material-symbols-rounded text-xs pt-1 position-absolute end-0">add</i>
+                    <i class="collapse-open material-symbols-rounded text-xs pt-1 position-absolute end-0">remove</i>
                   </button>
                 </h5>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
@@ -1899,8 +1899,8 @@
                     data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                     aria-controls="collapseTwo">
                     Is Material Dashboard free?
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
-                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>
+                    <i class="collapse-close material-symbols-rounded text-xs pt-1 position-absolute end-0">add</i>
+                    <i class="collapse-open material-symbols-rounded text-xs pt-1 position-absolute end-0">remove</i>
                   </button>
                 </h5>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -1916,8 +1916,8 @@
                     data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                     aria-controls="collapseThree">
                     Can I get Material Dashboard on other technologies than Bootstrap?
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
-                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>
+                    <i class="collapse-close material-symbols-rounded text-xs pt-1 position-absolute end-0">add</i>
+                    <i class="collapse-open material-symbols-rounded text-xs pt-1 position-absolute end-0">remove</i>
                   </button>
                 </h5>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
@@ -1934,8 +1934,8 @@
                     data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
                     aria-controls="collapseFour">
                     Can I get Material Dashboard Figma Files for free?
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
-                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>
+                    <i class="collapse-close material-symbols-rounded text-xs pt-1 position-absolute end-0">add</i>
+                    <i class="collapse-open material-symbols-rounded text-xs pt-1 position-absolute end-0">remove</i>
                   </button>
                 </h5>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
@@ -1952,8 +1952,8 @@
                     data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
                     aria-controls="collapseFive">
                     What is the difference between Material Dashboard PRO and Material Design Bundle?
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
-                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>
+                    <i class="collapse-close material-symbols-rounded text-xs pt-1 position-absolute end-0">add</i>
+                    <i class="collapse-open material-symbols-rounded text-xs pt-1 position-absolute end-0">remove</i>
                   </button>
                 </h5>
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"

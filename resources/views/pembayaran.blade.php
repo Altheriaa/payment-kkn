@@ -20,7 +20,7 @@
                       <div class="d-flex gap-2 justify-content-center flex-wrap">
                         <button type="button" onclick="processPayment('{{ $pendingPayment->snap_token }}')"
                           class="btn btn-success px-3">
-                          <i class="fas fa-credit-card"></i> Bayar Sekarang
+                          <i class="material-symbols-rounded">credit_card</i> Bayar Sekarang
                         </button>
 
                         <form action="{{ route('mahasiswa.pembayaran.cancel', ['id' => $pendingPayment->id]) }}"
@@ -28,12 +28,12 @@
                           onsubmit="return confirm('Anda yakin ingin membatalkan transaksi {{ $pendingPayment->order_id }}?');">
                           @csrf
                           <button type="submit" class="btn btn-danger px-3">
-                            <i class="fas fa-times"></i> Batalkan Pembayaran
+                            <i class="material-symbols-rounded">close</i> Batalkan Pembayaran
                           </button>
                         </form>
 
                         <a href="{{ route('mahasiswa.riwayat') }}" class="btn btn-outline-dark px-3">
-                          <i class="fas fa-history"></i> Lihat Riwayat
+                          <i class="material-symbols-rounded">history</i> Lihat Riwayat
                         </a>
                       </div>
                     </div>
@@ -120,7 +120,7 @@
 
                     <div class="col-12 text-end mt-4">
                       <button id="bayar-button" class="btn btn-success px-3">
-                        <i class="fas fa-credit-card me-1"></i>Bayar
+                        <i class="material-symbols-rounded me-1">credit_card</i>Bayar
                       </button>
                     </div>
 
@@ -131,7 +131,7 @@
               {{-- Jika sudah daftar --}}
             @else
               <div class="text-center alert alert-success p-4">
-                <i class="fas fa-check-circle me-1 text-white"></i>
+                <i class="material-symbols-rounded me-1 text-white">check_circle</i>
                 <strong class="text-white">Anda sudah terdaftar KKN.</strong>
               </div>
             @endif
@@ -174,7 +174,7 @@
                     if (bayarBtn) {
                       bayarBtn.disabled = false;
                       window.location.reload();
-                      bayarBtn.innerHTML = '<i class="fas fa-credit-card me-1"></i>Bayar';
+                      bayarBtn.innerHTML = '<i class="material-symbols-rounded me-1">credit_card</i>Bayar';
                     }
                   }
                 });
@@ -211,7 +211,7 @@
 
                       // Loading state
                       bayarBtn.disabled = true;
-                      bayarBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+                      bayarBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Memproses...';
 
                       // Request Token Baru ke Backend
                       fetch("{{ route('mahasiswa.pembayaran.daftar') }}", {
@@ -236,7 +236,7 @@
                         .catch(err => {
                           Swal.fire({ icon: 'error', title: 'Gagal', text: err.message });
                           bayarBtn.disabled = false;
-                          bayarBtn.innerHTML = '<i class="fas fa-credit-card me-1"></i>Bayar';
+                          bayarBtn.innerHTML = '<i class="material-symbols-rounded me-1">credit_card</i>Bayar';
                         });
                     });
                   });
