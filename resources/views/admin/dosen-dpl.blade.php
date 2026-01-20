@@ -1,6 +1,3 @@
-<div>
-    <!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
-</div>
 @extends('layouts.app')
 
 @section('content')
@@ -10,8 +7,8 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                            <h4 class="text-white text-capitalize ps-3"> Lokasi KKN </h4>
-                            <h6 class="text-white ps-3">Daftar Lokasi KKN</h6>
+                            <h4 class="text-white text-capitalize ps-3"> Dosen Pembimbing Lapangan KKN </h4>
+                            <h6 class="text-white ps-3">Daftar Dosen Pembimbing Lapangan KKN</h6>
                         </div>
                     </div>
                     <div class="card-body p-3">
@@ -19,14 +16,14 @@
                             class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
                             <div>
                                 <button type="button" class="btn bg-gradient-dark mb-0 btn-add" data-bs-toggle="modal"
-                                    data-bs-target="#modalLokasi">
-                                    <i class="material-symbols-rounded text-sm me-1">add</i> Tambah Lokasi
+                                    data-bs-target="#modalDosen">
+                                    <i class="material-symbols-rounded text-sm me-1">add</i> Tambah DPL
                                 </button>
                             </div>
-                            <form action="{{ route('admin.lokasi-kkn') }}" method="GET" class="mb-0">
+                            <form action="{{ route('admin.dosen-dpl') }}" method="GET" class="mb-0">
                                 <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }}"
                                     style="min-width: 250px;">
-                                    <label class="form-label">Cari Lokasi...</label>
+                                    <label class="form-label">Cari DPL...</label>
                                     <input type="text" class="form-control" id="searchInput" name="search"
                                         value="{{ request('search') }}" onfocus="focused(this)"
                                         onfocusout="defocused(this)">
@@ -40,11 +37,16 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Kabupaten/Kota</th>
+                                            NUPTK</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Kecamatan</th>
+                                            Nama DPL</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Desa
+                                            Program Studi</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Bidang Keahlian
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            No Handphone
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -53,12 +55,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
-                                    @include('admin.partials.lokasi-kkn-table')
+                                    @include('admin.partials.dosen-dpl-table')
                                 </tbody>
                             </table>
                             {{-- Pagination Links --}}
                             <div class="d-flex justify-content-center mt-3 mb-4">
-                                {{ $lokasiKkns->appends(request()->query())->links('vendor.pagination.simple-dark') }}
+                                {{ $dosendpls->appends(request()->query())->links('vendor.pagination.simple-dark') }}
                             </div>
                         </div>
                     </div>
@@ -68,36 +70,44 @@
     </div>
 
     {{-- Modal Global (Tambah & Edit) --}}
-    <div class="modal fade" id="modalLokasi" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal fade" id="modalDosen" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     {{-- ID Judul diubah jadi dinamis --}}
-                    <h5 class="modal-title font-weight-normal" id="modalTitle">Tambah Lokasi KKN</h5>
+                    <h5 class="modal-title font-weight-normal" id="modalTitle">Tambah DPL</h5>
                     <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 {{-- Form diberikan ID --}}
-                <form id="formLokasi" action="{{ route('tambahLokasiKkn') }}" method="POST">
+                <form id="formDosen" action="{{ route('tambahDosen') }}" method="POST">
                     @csrf
                     {{-- Container untuk menampung method PUT saat edit --}}
                     <div id="methodInput"></div>
 
                     <div class="modal-body">
                         <div class="input-group input-group-outline mb-3">
-                            <label class="form-label">Kabupaten/Kota</label>
+                            <label class="form-label">NUPTK</label>
                             {{-- Input diberikan ID --}}
-                            <input type="text" class="form-control" name="kabupaten_kota" id="kabupaten_kota" required>
+                            <input type="number" class="form-control" name="nuptk" id="nuptk" required>
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                            <label class="form-label">Kecamatan</label>
-                            <input type="text" class="form-control" name="kecamatan" id="kecamatan" required>
+                            <label class="form-label">Nama DPL</label>
+                            <input type="text" class="form-control" name="nama_dosen" id="nama_dosen" required>
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                            <label class="form-label">Desa</label>
-                            <input type="text" class="form-control" name="nama_desa" id="nama_desa" required>
+                            <label class="form-label">Program Studi</label>
+                            <input type="text" class="form-control" name="prodi" id="prodi" required>
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                            <label class="form-label">Bidang Keahlian</label>
+                            <input type="text" class="form-control" name="bidang_keahlian" id="bidang_keahlian" required>
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                            <label class="form-label">No Handphone</label>
+                            <input type="number" class="form-control" name="no_hp" id="no_hp" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -122,16 +132,16 @@
             // script tambah
             $('.btn-add').click(function () {
                 // Ganti Judul & URL Action Form
-                $('#modalTitle').text('Tambah Lokasi KKN');
-                $('#formLokasi').attr('action', "{{ route('tambahLokasiKkn') }}");
+                $('#modalTitle').text('Tambah Dosen DPL');
+                $('#formDosen').attr('action', "{{ route('tambahDosen') }}");
 
                 // Hapus Method PUT (Kembali ke POST murni)
                 $('#methodInput').empty();
 
                 // Kosongkan Form
-                $('#kabupaten_kota').val('');
-                $('#kecamatan').val('');
-                $('#nama_desa').val('');
+                $('#nuptk').val('');
+                $('#nama_dosen').val('');
+
 
                 // Reset Label Material Dashboard (Turun ke bawah)
                 $('.input-group').removeClass('is-filled');
@@ -142,22 +152,26 @@
             $('body').on('click', '.btn-edit', function () {
 
                 // Ambil data dari tombol yang diklik
-                let kab = $(this).data('kabupaten');
-                let kec = $(this).data('kecamatan');
-                let desa = $(this).data('desa');
+                let nuptk = $(this).data('nuptk');
+                let nama_dosen = $(this).data('nama_dosen');
+                let prodi = $(this).data('prodi');
+                let bidang_keahlian = $(this).data('bidang_keahlian');
+                let no_hp = $(this).data('no_hp');
                 let url = $(this).data('url');
 
                 // Ganti Judul & URL Action Form
-                $('#modalTitle').text('Edit Lokasi KKN');
-                $('#formLokasi').attr('action', url);
+                $('#modalTitle').text('Edit Dosen DPL');
+                $('#formDosen').attr('action', url);
 
                 // Tambahkan Hidden Input Method PUT (Wajib buat Update di Laravel)
                 $('#methodInput').html('<input type="hidden" name="_method" value="PUT">');
 
                 // Isi Input dengan Data Lama
-                $('#kabupaten_kota').val(kab);
-                $('#kecamatan').val(kec);
-                $('#nama_desa').val(desa);
+                $('#nuptk').val(nuptk);
+                $('#nama_dosen').val(nama_dosen);
+                $('#prodi').val(prodi);
+                $('#bidang_keahlian').val(bidang_keahlian);
+                $('#no_hp').val(no_hp);
 
                 // Tambah class 'is-filled' supaya label naik ke atas (Gaya Material UI)
                 $('.input-group').addClass('is-filled');
@@ -171,7 +185,7 @@
             $('#searchInput').on('keyup', function () {
                 let search = $(this).val();
                 $.ajax({
-                    url: "{{ route('admin.lokasi-kkn') }}",
+                    url: "{{ route('admin.dosen-dpl') }}",
                     type: "GET",
                     data: {
                         search: search,
@@ -184,14 +198,14 @@
         });
 
         // sweetalert confirm
-        $(document).on('submit', '.form-hapus-lokasi', function (e) {
+        $(document).on('submit', '.form-hapus-dosen', function (e) {
             e.preventDefault(); // Stop form submit asli
 
             let form = this; // Simpan form yang sedang diklik
 
             Swal.fire({
                 title: 'Konfirmasi Hapus',
-                text: 'Yakin ingin menghapus lokasi ini? Data tidak bisa kembali.',
+                text: 'Yakin ingin menghapus Dosen ini? Data tidak bisa kembali.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

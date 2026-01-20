@@ -11,6 +11,7 @@ class DosenDpl extends Model
     protected $fillable = [
         'nuptk',
         'nama_dosen',
+        'prodi',
         'bidang_keahlian',
         'no_hp'
     ];

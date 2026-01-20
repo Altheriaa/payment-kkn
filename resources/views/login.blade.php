@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Login - Sistem Pembayaran KKN Unaya
+    Login - Sistem KKN Unaya
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
@@ -43,7 +43,7 @@
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
                   <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Login</h4>
-                  <h5 class="text-white font-weight-bolder text-center mt-2 mb-0">Sistem Pembayaran KKN Unaya</h4>
+                  <h5 class="text-white font-weight-bolder text-center mt-2 mb-0">Sistem KKN Unaya</h4>
                 </div>
               </div>
               <div class="card-body">

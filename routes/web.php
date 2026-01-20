@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\CetakInvoice as AdminCetakInvoice;
 use App\Http\Controllers\Admin\CetakPendaftaran as AdminCetakPendaftaran;
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\HapusTransaksiController;
-use App\Http\Controllers\Admin\LaporanBulananController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\RiwayatPendaftaranController;
 use App\Http\Controllers\Auth\LoginAdminController;
@@ -19,9 +18,14 @@ use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
 use App\Http\Controllers\Admin\JadwalKknController;
 use App\Http\Controllers\Admin\LokasiKknController;
+use App\Http\Controllers\Admin\DosenDplController;
+use App\Http\Controllers\LandingPageController;
+
+// Landing Page
+Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 
 // login mahasiswa
-Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'login'])->name('login.post');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -99,6 +103,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/lokasi-kkn', [LokasiKknController::class, 'store'])->name('tambahLokasiKkn');
     Route::delete('/lokasi-kkn/hapus/{id}', [LokasiKknController::class, 'delete'])->name('hapusLokasiKkn');
     Route::put('/lokasi-kkn/update/{id}', [LokasiKknController::class, 'update'])->name('updateLokasiKkn');
+
+    // Dosen DPL
+    Route::get('/dosen-dpl', [DosenDplController::class, 'index'])->name('admin.dosen-dpl');
+    Route::post('/dosen-dpl', [DosenDplController::class, 'store'])->name('tambahDosen');
+    Route::delete('/dosen-dpl/hapus/{id}', [DosenDplController::class, 'delete'])->name('hapusDosen');
+    Route::put('/dosen-dpl/update/{id}', [DosenDplController::class, 'update'])->name('updateDosen');
 
     // Laporan Bulanan
 

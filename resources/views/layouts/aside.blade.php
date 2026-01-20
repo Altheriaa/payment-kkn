@@ -18,35 +18,42 @@
                     <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('admin.dashboard') }}">
                         <i class="material-symbols-rounded opacity-5">dashboard</i>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-2">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('mahasiswa.admin') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('mahasiswa.admin') }}">
                         <i class="material-symbols-rounded opacity-5">table_view</i>
-                        <span class="nav-link-text ms-1">Mahasiswa</span>
+                        <span class="nav-link-text ms-2">Mahasiswa</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.riwayat') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('admin.riwayat') }}">
                         <i class="material-symbols-rounded opacity-5">receipt_long</i>
-                        <span class="nav-link-text ms-1">Riwayat Pendaftaran</span>
+                        <span class="nav-link-text ms-2">Riwayat Pendaftaran</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.jadwal-kkn') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('admin.jadwal-kkn') }}">
                         <i class="material-symbols-rounded opacity-5">calendar_month</i>
-                        <span class="nav-link-text ms-1">Jadwal KKN</span>
+                        <span class="nav-link-text ms-2">Jadwal KKN</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.lokasi-kkn') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('admin.lokasi-kkn') }}">
                         <i class="material-symbols-rounded opacity-5">location_on</i>
-                        <span class="nav-link-text ms-1">Lokasi KKN</span>
+                        <span class="nav-link-text ms-2">Lokasi KKN</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.dosen-dpl') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.dosen-dpl') }}">
+                        <i class="material-symbols-rounded opacity-5">groups_3</i>
+                        <span class="nav-link-text ms-2">DPL</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item">
