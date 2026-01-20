@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\JadwalKkn;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,20 @@ class BiodataController extends Controller
 {
     public function index()
     {
+        //validasi apakah pendaftaran buka ato ga?
+        $hariini = now()->format('Y-m-d');
+
+        $cekJadwal = JadwalKkn::where('is_active', true)
+            ->whereDate('tanggal_dibuka', '<=', $hariini)
+            ->whereDate('tanggal_ditutup', '>=', $hariini)
+            ->first();
+
+        if (! $cekJadwal) {
+            return back()->withErrors([
+                'error' => 'Pendaftaran KKN belum dibuka.',
+            ]);
+        }
+
         // Ambil dari session
         $mahasiswaSession = Session::get('mahasiswa_data');
 

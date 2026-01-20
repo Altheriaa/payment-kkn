@@ -14,4 +14,10 @@ class DosenDpl extends Model
         'bidang_keahlian',
         'no_hp'
     ];
+
+    // satu dpl bisa membimbing bnyak kelompok (pertimbangan karna bisa milih tahun)
+    public function kelompokKkn()
+    {
+        return $this->hasMany(KelompokKkn::class, 'dpl_id');
+    }
 }

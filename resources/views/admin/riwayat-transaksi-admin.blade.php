@@ -35,7 +35,7 @@
 
                                 {{-- Tombol Filter & Reset (Di Mobile akan sejajar berdampingan) --}}
                                 <div class="col-8 col-md-2">
-                                    <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 39px;">
+                                    <button type="submit" class="btn bg-gradient-dark mb-0 w-100" style="height: 39px;">
                                         <i class="material-symbols-rounded text-sm me-1">filter_alt</i> Filter
                                     </button>
                                 </div>
@@ -106,8 +106,8 @@
                                 </tbody>
                             </table>
                             {{-- Pagination Links --}}
-                            <div class="d-flex justify-content-center mt-4">
-                                {{ $payments->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
+                            <div class="d-flex justify-content-center mt-4 mb-4">
+                                {{ $payments->appends(request()->query())->links('vendor.pagination.simple-dark') }}
                             </div>
                         </div>
                     </div>
@@ -116,33 +116,8 @@
         </div>
     </div>
 
-    <!-- Midtrans Snap -->
-    {{--
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{ config('midtrans.client_key') }}"></script> --}}
-
     {{-- SweetAlert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    {{--
-    <script>
-        function bayarLagi(snapToken) {
-            snap.pay(snapToken, {
-                onSuccess: function (result) {
-                    alert('Pembayaran berhasil!');
-                    location.reload();
-                },
-                onPending: function (result) {
-                },
-                onError: function (result) {
-                    alert('Pembayaran gagal!');
-                },
-                onClose: function () {
-                    console.log('Popup ditutup');
-                }
-            });
-        }
-    </script> --}}
 
     {{-- error/success/warning handle sweet alert --}}
     <script>

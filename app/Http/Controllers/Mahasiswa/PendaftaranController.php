@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\JadwalKkn;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -19,6 +20,18 @@ class PendaftaranController extends Controller
 {
     public function index()
     {
+        $hariini = now()->format('Y-m-d');
+
+        $cekJadwal = JadwalKkn::where('is_active', true)
+            ->whereDate('tanggal_dibuka', '<=', $hariini)
+            ->whereDate('tanggal_ditutup', '>=', $hariini)
+            ->first();
+
+        if (! $cekJadwal) {
+            return back()->withErrors([
+                'error' => 'Pendaftaran KKN belum dibuka.',
+            ]);
+        }
 
         // 1. Ambil HANYA ID mahasiswa dari session
         $mahasiswaId = Session::get('mahasiswa_data')['id'];

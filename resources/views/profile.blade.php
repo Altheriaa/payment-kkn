@@ -177,4 +177,51 @@
               </div>
           </div>
       </div>
+
+      {{-- SweetAlert2 CDN --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- error/success/warning handle sweet alert --}}
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-semibold',
+                    icon: 'icon-custom bg-transparent'
+                },
+                timer: 2000
+            });
+        @elseif (session('warning'))
+            Swal.fire({
+                icon: 'warning',
+                text: "{{ session('warning') }}",
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-semibold',
+                    icon: 'icon-custom bg-transparent'
+                },
+                timer: 2000
+            });
+        @endif
+
+        @if($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-bold',
+                    confirmButton: 'button-confirm px-6 py-2 rounded-xl text-white',
+                }
+            });
+        @endif
+    </script>
 @endsection
+

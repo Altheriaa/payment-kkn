@@ -1,8 +1,8 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2"
     id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-            aria-hidden="true" id="iconSidenav"></i>
+        <i class="material-symbols-rounded p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+            aria-hidden="true" id="iconSidenav">close</i>
         <a class="navbar-brand px-4 py-3 m-0" href="{{ route('mahasiswa.dashboard') }}" target="_blank">
             <img src="{{ asset('assets/img/Unaya.png') }}" class="navbar-brand-img" width="26" height="26"
                 alt="main_logo">
@@ -33,6 +33,20 @@
                         href="{{ route('admin.riwayat') }}">
                         <i class="material-symbols-rounded opacity-5">receipt_long</i>
                         <span class="nav-link-text ms-1">Riwayat Pendaftaran</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.jadwal-kkn') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.jadwal-kkn') }}">
+                        <i class="material-symbols-rounded opacity-5">calendar_month</i>
+                        <span class="nav-link-text ms-1">Jadwal KKN</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.lokasi-kkn') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.lokasi-kkn') }}">
+                        <i class="material-symbols-rounded opacity-5">location_on</i>
+                        <span class="nav-link-text ms-1">Lokasi KKN</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item">

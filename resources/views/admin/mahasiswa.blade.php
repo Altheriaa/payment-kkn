@@ -31,7 +31,7 @@
 
                                 {{-- Tombol Filter & Reset (Di Mobile akan sejajar berdampingan) --}}
                                 <div class="col-8 col-md-2">
-                                    <button type="submit" class="btn btn-primary w-100 mb-0" style="height: 39px;">
+                                    <button type="submit" class="btn bg-gradient-dark mb-0 w-100" style="height: 39px;">
                                         <i class="material-symbols-rounded text-sm me-1">filter_alt</i> Filter
                                     </button>
                                 </div>
@@ -84,8 +84,8 @@
                                 </tbody>
                             </table>
                             {{-- Pagination Links --}}
-                            <div class="d-flex justify-content-center mt-4">
-                                {{ $mahasiswas->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
+                            <div class="d-flex justify-content-center mt-4 mb-4">
+                                {{ $mahasiswas->appends(request()->query())->links('vendor.pagination.simple-dark') }}
                             </div>
                         </div>
                     </div>
@@ -93,65 +93,25 @@
             </div>
         </div>
 
-        <footer class="footer py-4 position-fixed bottom-0 start-0 w-100 bg-white">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="material-symbols-rounded text-sm">favorite</i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative
-                                    Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About
-                                    Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    {{-- Script Pencarian --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#searchInput').on('keyup', function () {
-                let search = $(this).val();
-                let status = $('select[name="status_kkn"]').val();
-                $.ajax({
-                    url: "{{ route('mahasiswa.admin') }}",
-                    type: "GET",
-                    data: {
-                        search: search,
-                        status: status
-                    },
-                    success: function (response) {
-                        $('.table-body').html(response);
-                    }
+        {{-- Script Pencarian --}}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#searchInput').on('keyup', function () {
+                    let search = $(this).val();
+                    let status = $('select[name="status_kkn"]').val();
+                    $.ajax({
+                        url: "{{ route('mahasiswa.admin') }}",
+                        type: "GET",
+                        data: {
+                            search: search,
+                            status: status
+                        },
+                        success: function (response) {
+                            $('.table-body').html(response);
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 @endsection

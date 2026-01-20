@@ -291,6 +291,18 @@
                 },
                 timer: 2000
             });
+        @elseif (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Data Anda Tidak Sesuai!',
+                text: "{{ session('error') }}",
+                showConfirmButton: true,
+                customClass: {
+                    popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                    title: 'font-semibold',
+                    icon: 'icon-custom bg-transparent'
+                }
+            });
         @elseif (session('warning'))
             Swal.fire({
                 icon: 'warning',

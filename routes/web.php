@@ -17,6 +17,8 @@ use App\Http\Controllers\MidtransWebhookController;
 use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
+use App\Http\Controllers\Admin\JadwalKknController;
+use App\Http\Controllers\Admin\LokasiKknController;
 
 // login mahasiswa
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -88,8 +90,19 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/riwayat/hapus/{id}', [HapusTransaksiController::class, 'hapusTransaksi'])
         ->name('admin.hapus.transaksi');
 
+    // sinkron jadwal
+    Route::get('/jadwal-kkn', [JadwalKknController::class, 'index'])->name('admin.jadwal-kkn');
+    Route::post('/sinkron-jadwal', [JadwalKknController::class, 'sync'])->name('admin.sinkron.jadwal');
+
+    // Lokasi KKN
+    Route::get('/lokasi-kkn', [LokasiKknController::class, 'index'])->name('admin.lokasi-kkn');
+    Route::post('/lokasi-kkn', [LokasiKknController::class, 'store'])->name('tambahLokasiKkn');
+    Route::delete('/lokasi-kkn/hapus/{id}', [LokasiKknController::class, 'delete'])->name('hapusLokasiKkn');
+    Route::put('/lokasi-kkn/update/{id}', [LokasiKknController::class, 'update'])->name('updateLokasiKkn');
+
     // Laporan Bulanan
-    Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');
+
+    // Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');
 
     // Cetak Laporan Bulanan
     // Route::get('/laporan-bulanan/cetak/{bulan}/{tahun}', [LaporanBulananController::class, 'cetakLaporanBulanan'])
