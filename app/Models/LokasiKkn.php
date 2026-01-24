@@ -14,9 +14,9 @@ class LokasiKkn extends Model
         'kabupaten_kota'
     ];
 
-    // satu lokasi kkn bisa dihuni oleh bnyak kelompok (pertimbangan karna bisa milih tahun)
+    // satu lokasi kkn hanya bisa dihuni oleh satu kelompok (pertimbangan karna bisa milih tahun)
     public function kelompokKkn()
     {
-        return $this->hasMany(KelompokKkn::class, 'lokasi_kkn_id');
+        return $this->hasOne(KelompokKkn::class, 'lokasi_kkn_id');
     }
 }

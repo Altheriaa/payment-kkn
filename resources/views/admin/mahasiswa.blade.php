@@ -47,7 +47,7 @@
                                 <div class="col-12 col-md-4">
                                     {{-- Tambahkan logic 'is-filled' agar label tidak menumpuk saat ada value --}}
                                     <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }}">
-                                        <label class="form-label">Cari Transaksi...</label>
+                                        <label class="form-label">Cari Mahasiswa...</label>
                                         <input type="text" class="form-control" id="searchInput" name="search"
                                             value="{{ request('search') }}" onfocus="focused(this)"
                                             onfocusout="defocused(this)">

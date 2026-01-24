@@ -25,7 +25,7 @@ class MahasiswaController extends Controller
             $query->where('status_kkn', $request->status_kkn);
         }
 
-        $mahasiswas = $query->orderBy('created_at', 'desc')->paginate(5);
+        $mahasiswas = $query->orderBy('created_at', 'desc')->paginate(5)->withQueryString();
 
         if ($request->ajax()) {
             return view('admin.partials.mahasiswa-table', compact('mahasiswas'))->render();

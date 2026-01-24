@@ -90,6 +90,8 @@ class PendaftaranController extends Controller
     {
         $request->validate(['jenis_kkn_id' => 'required|integer']);
         $jenisKknIdDipilih = $request->jenis_kkn_id;
+        $jadwalKknId = JadwalKkn::where('tanggal_dibuka', '<=', now())
+            ->where('tanggal_ditutup', '>=', now())->first()->id;
 
         $mahasiswaData = Session::get('mahasiswa_data');
         $mahasiswaId = $mahasiswaData['id'];
@@ -135,6 +137,7 @@ class PendaftaranController extends Controller
             $pendaftaran = PendaftaranKkn::create([
                 'mahasiswa_id' => $mahasiswaId,
                 'jenis_kkn_id' => $jenisKknIdDipilih,
+                'jadwal_kkn_id' => $jadwalKknId,
                 'jenis_kkn' => $dataFromSiakad['jenis_kkn'],
                 'status_pendaftaran' => 'pending',
                 'payment_id' => $payment->id,

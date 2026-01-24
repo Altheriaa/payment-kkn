@@ -19,6 +19,8 @@ use App\Http\Controllers\Mahasiswa\ProfileController;
 use App\Http\Controllers\Admin\JadwalKknController;
 use App\Http\Controllers\Admin\LokasiKknController;
 use App\Http\Controllers\Admin\DosenDplController;
+use App\Http\Controllers\Admin\PlottingController;
+use App\Http\Controllers\Admin\KelolaAnggotaController;
 use App\Http\Controllers\LandingPageController;
 
 // Landing Page
@@ -109,6 +111,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/dosen-dpl', [DosenDplController::class, 'store'])->name('tambahDosen');
     Route::delete('/dosen-dpl/hapus/{id}', [DosenDplController::class, 'delete'])->name('hapusDosen');
     Route::put('/dosen-dpl/update/{id}', [DosenDplController::class, 'update'])->name('updateDosen');
+
+    // Plotting Admin
+    Route::get('/plotting', [PlottingController::class, 'index'])->name('admin.plotting');
+    Route::post('/plotting-kelompok/tambah', [PlottingController::class, 'storeKelompok'])->name('tambahKelompok');
+    Route::delete('/plotting-kelompok/hapus/{id}', [PlottingController::class, 'deleteKelompok'])->name('hapusKelompok');
+    Route::put('/plotting-kelompok/update/{id}', [PlottingController::class, 'updateKelompok'])->name('updateKelompok');
+    // Kelola Anggota
+    Route::get('/plotting/kelola-anggota', [KelolaAnggotaController::class, 'index'])->name('admin.plotting.kelola-anggota');
 
     // Laporan Bulanan
 

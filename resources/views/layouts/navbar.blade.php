@@ -12,25 +12,33 @@
                     if ($routeName) {
                         // Map route names to user-friendly titles
                         switch ($routeName) {
-                            case 'dashboard':
+                            // Case Mahasiswa
+
+                            // Case Admin
+                            case 'admin.dashboard':
                                 $pageTitle = 'Dashboard';
                                 break;
-                            case 'mahasiswa.dashboard':
-                                $pageTitle = 'Dashboard Mahasiswa';
-                            case 'mahasiswa.biodata.index':
-                                $pageTitle = 'Biodata';
-                            case 'table':
-                                $pageTitle = 'Tables';
                             case 'mahasiswa.admin':
-                                $pageTitle = 'Mahasiswa';
-                            case 'mahasiswa.pembayaran':
-                                $pageTitle = 'Pembayaran';
-                            case 'mahasiswa.riwayat':
+                                $pageTitle = 'Daftar Mahasiswa';
+                                break;
+                            case 'mahasiswa.detail':
+                                $pageTitle = 'Detail Mahasiswa';
+                                break;
+                            case 'admin.riwayat':
                                 $pageTitle = 'Riwayat Transaksi';
                                 break;
-                            // Tambahkan case lain di sini untuk route yang Anda definisikan
-                            // Contoh: case 'billing': $pageTitle = 'Billing'; break;
-                            // Contoh: case 'profile': $pageTitle = 'Profile'; break;
+                            case 'admin.lokasi-kkn':
+                                $pageTitle = 'Lokasi KKN';
+                                break;
+                            case 'admin.jadwal-kkn':
+                                $pageTitle = 'Jadwal KKN';
+                                break;
+                            case 'admin.dosen-dpl':
+                                $pageTitle = 'Dosen Pembimbing Lapangan';
+                                break;
+                            case 'admin.plotting':
+                                $pageTitle = 'Penempatan Mahasiswa';
+                                break;
                             default:
                                 $pageTitle = ucfirst(str_replace(['-', '_'], ' ', $routeName)); // Mengubah nama route (misal: 'my-page' menjadi 'My Page')
                                 break;

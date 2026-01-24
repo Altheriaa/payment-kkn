@@ -30,7 +30,7 @@ class RiwayatPendaftaranController extends Controller
             $query->where('status', $request->status);
         }
 
-        $payments = $query->orderBy('created_at', 'desc')->paginate(5);
+        $payments = $query->orderBy('created_at', 'desc')->paginate(5)->withQueryString();
 
         if ($request->ajax()) {
             return view('admin.partials.transaksi-table', compact('payments'))->render();

@@ -6,7 +6,7 @@
         <a class="navbar-brand px-4 py-3 m-0" href="{{ route('mahasiswa.dashboard') }}" target="_blank">
             <img src="{{ asset('assets/img/Unaya.png') }}" class="navbar-brand-img" width="26" height="26"
                 alt="main_logo">
-            <span class="ms-1 text-sm text-dark">Payment KKN Unaya</span>
+            <span class="ms-1 text-sm text-dark">Sistem KKN Unaya</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0 mb-2">
@@ -54,6 +54,13 @@
                         href="{{ route('admin.dosen-dpl') }}">
                         <i class="material-symbols-rounded opacity-5">groups_3</i>
                         <span class="nav-link-text ms-2">DPL</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.plotting') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.plotting') }}">
+                        <i class="material-symbols-rounded opacity-5">group_add</i>
+                        <span class="nav-link-text ms-2">Plotting</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item">

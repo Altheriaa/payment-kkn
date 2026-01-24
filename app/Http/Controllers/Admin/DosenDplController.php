@@ -23,12 +23,12 @@ class DosenDplController extends Controller
             });
         }
 
-        $dosendpls = $query->orderBy('created_at', 'desc')->paginate(5);
+        $dosendpls = $query->orderBy('created_at', 'desc')->paginate(5)->withQueryString();
 
         if ($request->ajax()) {
             return view('admin.partials.dosen-dpl-table', compact('dosendpls'))->render();
         }
-
+        
         return view('admin.dosen-dpl', [
             'dosendpls' => $dosendpls
         ]);
