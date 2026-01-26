@@ -26,7 +26,7 @@
                 data-bs-toggle="modal" data-bs-target="#modalLokasi" data-id="{{ $lokasiKkn->id }}"
                 data-kabupaten="{{ $lokasiKkn->kabupaten_kota }}" data-kecamatan="{{ $lokasiKkn->kecamatan }}"
                 data-desa="{{ $lokasiKkn->nama_desa }}" data-url="{{ route('updateLokasiKkn', $lokasiKkn->id) }}">
-                Edit
+                <i class="material-symbols-rounded text-sm ">edit</i>
             </button>
             <form action="{{ route('hapusLokasiKkn', $lokasiKkn->id) }}" method="POST" style="display: inline-block;"
                 class="form-hapus-lokasi">
@@ -35,7 +35,7 @@
                 @method('DELETE')
 
                 <button type="submit" class="badge badge-sm bg-gradient-danger border-0 cursor-pointer">
-                    Hapus
+                    <i class="material-symbols-rounded text-sm ">delete</i>
                 </button>
             </form>
         </td>

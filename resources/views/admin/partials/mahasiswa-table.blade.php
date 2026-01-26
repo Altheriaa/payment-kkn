@@ -22,7 +22,8 @@
         </td>
         <td class="align-middle text-center text-sm">
             <a href={{ route('mahasiswa.detail', $mahasiswa->id) }}>
-                <span class="badge badge-sm bg-gradient-success">Lihat Detail</span>
+                <span class="badge badge-sm bg-gradient-success"><i
+                        class="material-symbols-rounded text-sm ">person</i></span>
             </a>
         </td>
     </tr>

@@ -1,6 +1,3 @@
-<div>
-    <!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
-</div>
 @extends('layouts.app')
 
 @section('content')
@@ -21,6 +18,10 @@
                                 <button type="button" class="btn bg-gradient-dark mb-0 btn-add" data-bs-toggle="modal"
                                     data-bs-target="#modalKelompok">
                                     <i class="material-symbols-rounded text-sm me-1">add</i> Tambah Kelompok
+                                </button>
+                                <button type="button" class="btn bg-gradient-primary mb-0 btn-add" data-bs-toggle="modal"
+                                    data-bs-target="#modalKelompok">
+                                    <i class="material-symbols-rounded text-sm me-1">print</i> Cetak Kelompok Periode
                                 </button>
                             </div>
                             <form action="{{ route('admin.plotting') }}" method="GET" class="mb-0">
@@ -130,8 +131,8 @@
                             <label class="form-label">Jenis KKN</label>
                             <select class="form-control" name="jenis_kkn" id="jenis_kkn" required>
                                 <option value="">Pilih Jenis KKN</option>
-                                <option value="Reguler">Reguler</option>
-                                <option value="Non Reguler">Non Reguler</option>
+                                <option value="KKN-UNAYA Regular">KKN-UNAYA Regular</option>
+                                <option value="KKN-UNAYA Non-Regular">KKN-UNAYA Non-Regular</option>
                             </select>
                         </div>
                     </div>
@@ -170,6 +171,12 @@
                 $('#nama_kelompok').val('');
                 $('#jenis_kkn').val('');
 
+                // LOGIKA KUNCI UTAMA (RESET):
+                // 1. Hidupkan kembali select box biar bisa dipilih
+                $('#jenis_kkn').prop('disabled', false);
+                // 2. Hapus input hidden sisa edit (kalau ada)
+                $('#hidden_jenis_kkn').remove();
+
                 // Reset Label Material Dashboard (Turun ke bawah)
                 $('.input-group').removeClass('is-filled');
             });
@@ -199,6 +206,18 @@
                 $('#lokasi_kkn_id').val(lokasi_kkn_id);
                 $('#nama_kelompok').val(nama_kelompok);
                 $('#jenis_kkn').val(jenis_kkn);
+
+                // Mematikan Select Box (User tidak bisa klik)
+                $('#jenis_kkn').prop('disabled', true);
+
+                // Buat Input Hidden Palsu
+                // Karena elemen 'disabled' tidak dikirim ke controller
+                // Jadi kita kirim value-nya lewat input hidden ini
+                if ($('#hidden_jenis_kkn').length === 0) {
+                    $('#formKelompok').append('<input type="hidden" name="jenis_kkn" id="hidden_jenis_kkn" value="' + jenis_kkn + '">');
+                } else {
+                    $('#hidden_jenis_kkn').val(jenis_kkn);
+                }
 
                 // Tambah class 'is-filled' supaya label naik ke atas (Gaya Material UI)
                 $('.input-group').addClass('is-filled');

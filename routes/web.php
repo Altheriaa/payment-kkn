@@ -118,10 +118,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/plotting-kelompok/hapus/{id}', [PlottingController::class, 'deleteKelompok'])->name('hapusKelompok');
     Route::put('/plotting-kelompok/update/{id}', [PlottingController::class, 'updateKelompok'])->name('updateKelompok');
     // Kelola Anggota
-    Route::get('/plotting/kelola-anggota', [KelolaAnggotaController::class, 'index'])->name('admin.plotting.kelola-anggota');
+    Route::get('/plotting/kelola-anggota', [PlottingController::class, 'index'])->name('admin.plotting.kelola-anggota');
+    Route::get('plotting/kelola-anggota/detail/{id}', [PlottingController::class, 'kelolaAnggota'])->name('kelolaAnggota');
+    Route::put('/plotting/kelola-anggota/sync-anggota/{id}', [PlottingController::class, 'syncAnggota'])->name('syncAnggota');
+    // Route::put('plotting/kelola-anggota/tambah/{id}', [PlottingController::class, 'tambahAnggota'])->name('tambahAnggota');
+    // Route::delete('plotting/kelola-anggota/hapus/{pendaftaranKknId}', [PlottingController::class, 'hapusAnggota'])->name('hapusAnggota');
 
     // Laporan Bulanan
-
     // Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');
 
     // Cetak Laporan Bulanan

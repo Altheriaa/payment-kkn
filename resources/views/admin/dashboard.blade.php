@@ -120,52 +120,47 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($jadwal_kkn as $jadwal)
-                                            <tr>
-                                                {{-- Kolom Tahun Akademik (INI PERBAIKANNYA) --}}
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 ps-3">
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $jadwal['tahun_akademik']['tahun'] ?? '' }}
-                                                                ({{ $jadwal['tahun_akademik']['semester'] ?? 'N/A' }})
-                                                            </h6>
-                                                        </div>
+                                        <tr>
+                                            {{-- Kolom Tahun Akademik (INI PERBAIKANNYA) --}}
+                                            <td>
+                                                <div class="d-flex px-2 py-1 ps-3">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $jadwal_kkn->nama_periode ?? '' }}
+                                                        </h6>
                                                     </div>
-                                                </td>
+                                                </div>
+                                            </td>
 
-                                                {{-- Kolom Tanggal Dibuka (Ini sudah benar) --}}
-                                                <td class="align-middle text-center text-sm">
-                                                    <span class="text-xs font-weight-bold">
-                                                        {{ \Carbon\Carbon::parse($jadwal['tanggal_dibuka'])->format('d M Y') }}
-                                                    </span>
-                                                </td>
+                                            {{-- Kolom Tanggal Dibuka (Ini sudah benar) --}}
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="text-xs font-weight-bold">
+                                                    {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_dibuka'])->format('d M Y') }}
+                                                </span>
+                                            </td>
 
-                                                {{-- Kolom Tanggal Ditutup (Ini sudah benar) --}}
-                                                <td class="align-middle text-center text-sm">
-                                                    <span class="text-xs font-weight-bold">
-                                                        {{ \Carbon\Carbon::parse($jadwal['tanggal_ditutup'])->format('d M Y') }}
-                                                    </span>
-                                                </td>
+                                            {{-- Kolom Tanggal Ditutup (Ini sudah benar) --}}
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="text-xs font-weight-bold">
+                                                    {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_ditutup'])->format('d M Y') }}
+                                                </span>
+                                            </td>
 
-                                                {{-- Kolom Status (Baru, karena datanya ada) --}}
-                                                <td class="align-middle text-center text-sm">
-                                                    @if ($jadwal['status_pendaftaran'])
-                                                        <span class="badge badge-sm bg-gradient-success">Dibuka</span>
-                                                    @else
-                                                        <span class="badge badge-sm bg-gradient-secondary">Ditutup</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                {{-- Sesuaikan colspan menjadi 5 karena kita tambah 1 kolom --}}
-                                                <td colspan="5" class="align-middle text-center text-sm py-3">
-                                                    <span class="text-xs font-weight-bold"> Tidak Ada Jadwal KKN yang Dibuka
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        @endforelse
+                                            {{-- Kolom Status (Baru, karena datanya ada) --}}
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($jadwal_kkn->is_active == true)
+                                                    <span class="badge badge-sm bg-gradient-success">Dibuka</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-secondary">Ditutup</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        {{-- <tr>
+                                            <td colspan="5" class="align-middle text-center text-sm py-3">
+                                                <span class="text-xs font-weight-bold"> Tidak Ada Jadwal KKN yang Dibuka
+                                                </span>
+                                            </td>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

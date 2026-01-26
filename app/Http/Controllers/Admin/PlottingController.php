@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\KelompokKkn;
 use App\Models\JadwalKkn;
 use App\Models\LokasiKkn;
+use App\Models\PendaftaranKkn;
+use App\Models\Mahasiswa;
+
 
 class PlottingController extends Controller
 {
@@ -59,7 +62,7 @@ class PlottingController extends Controller
             'dpl_id' => 'required|exists:dosen_dpl,id|unique:kelompok_kkn,dpl_id,except,id',
             'lokasi_kkn_id' => 'required|exists:lokasi_kkn,id|unique:kelompok_kkn,lokasi_kkn_id,except,id',
             'nama_kelompok' => 'string|required|max:50',
-            'jenis_kkn' => 'required|string|in:Reguler,Non Reguler',
+            'jenis_kkn' => 'required|string|in:KKN-UNAYA Regular,KKN-UNAYA Non-Regular',
         ], [
             'lokasi_kkn_id.unique' => 'Desa tersebut sudah memiliki kelompok KKN.',
             'dpl_id.unique' => 'Dosen tersebut sudah memiliki kelompok KKN.',
@@ -81,7 +84,6 @@ class PlottingController extends Controller
             'dpl_id' => 'required|exists:dosen_dpl,id|unique:kelompok_kkn,dpl_id,' . $id,
             'lokasi_kkn_id' => 'required|exists:lokasi_kkn,id|unique:kelompok_kkn,lokasi_kkn_id,' . $id,
             'nama_kelompok' => 'string|required|max:50',
-            'jenis_kkn' => 'required|string|in:Reguler,Non Reguler',
         ], [
             'lokasi_kkn_id.unique' => 'Desa tersebut sudah memiliki kelompok KKN.',
             'dpl_id.unique' => 'Dosen tersebut sudah memiliki kelompok KKN.',
@@ -99,5 +101,82 @@ class PlottingController extends Controller
         $kelompok->delete();
 
         return redirect()->route('admin.plotting')->with('success', 'Kelompok KKN berhasil dihapus');
+    }
+
+    public function kelolaAnggota(Request $request, $id)
+    {
+
+        $kelompok = KelompokKkn::with(['dosenDpl', 'lokasiKkn', 'jadwalKkn'])->findOrFail($id);
+
+        $anggota = PendaftaranKkn::with('mahasiswa')
+            ->where('kelompok_kkn_id', $id)
+            ->get();
+
+        $queryKandidat = PendaftaranKkn::with('mahasiswa')
+            ->where('jadwal_kkn_id', $kelompok->jadwal_kkn_id)
+            ->where('jenis_kkn', $kelompok->jenis_kkn)
+            ->where('status_pendaftaran', 'valid')
+            ->whereNull('kelompok_kkn_id');
+
+        if (request()->filled('search')) {
+            $search = request()->search;
+
+            // query start contition
+            $queryKandidat->where(function ($q) use ($search) {
+                $q->whereHas('mahasiswa', function ($q2) use ($search) {
+                    $q2->where('nama', 'like', "%$search%");
+                })
+                    ->orWhereHas('mahasiswa', function ($q3) use ($search) {
+                        $q3->where('nim', 'like', "%$search%");
+                    })
+                    ->orWhereHas('mahasiswa', function ($q4) use ($search) {
+                        $q4->where('email', 'like', "%$search%");
+                    })
+                    ->orWhereHas('mahasiswa', function ($q5) use ($search) {
+                        $q5->where('fakultas', 'like', "%$search%");
+                    })
+                    ->orWhereHas('mahasiswa', function ($q6) use ($search) {
+                        $q6->where('prodi', 'like', "%$search%");
+                    });
+            });
+        }
+
+        $kandidat = $queryKandidat->get();
+
+        if ($request->ajax()) {
+            return view('admin.plotting.partials.kandidat-mahasiswa', compact('kandidat'))->render();
+        }
+
+        return view('admin.plotting.kelola-anggota', [
+            'kelompok' => $kelompok,
+            'anggota' => $anggota,
+            'kandidat' => $kandidat
+        ]);
+    }
+
+    public function syncAnggota(Request $request, $id)
+    {
+        // Validasi: member_ids adalah array berisi ID PendaftaranKkn
+        // 'nullable' artinya boleh kosong (jika semua anggota dihapus/kick)
+        $request->validate([
+            'anggota_ids' => 'nullable|array',
+            'anggota_ids.*' => 'exists:pendaftaran_kkn,id'
+        ]);
+
+        // Langkah 1: Reset Dulu!
+        // Keluarkan SEMUA mahasiswa yang sebelumnya ada di kelompok ini.
+        // Tujuannya agar data bersih sebelum list baru masuk.
+        PendaftaranKkn::where('kelompok_kkn_id', $id)
+            ->update(['kelompok_kkn_id' => null]);
+
+        // Langkah 2: Masukkan List Baru (Jika ada)
+        // Ambil array ID yang dikirim dari form (input hidden name="member_ids[]")
+        // Lalu set kelompok_kkn_id mereka ke ID kelompok ini.
+        if ($request->has('anggota_ids') && !empty($request->anggota_ids)) {
+            PendaftaranKkn::whereIn('id', $request->anggota_ids)
+                ->update(['kelompok_kkn_id' => $id]);
+        }
+
+        return back()->with('success', 'Perubahan anggota kelompok berhasil disimpan!');
     }
 }

@@ -1,6 +1,3 @@
-<div>
-    <!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
-</div>
 @extends('layouts.app')
 
 @section('content')

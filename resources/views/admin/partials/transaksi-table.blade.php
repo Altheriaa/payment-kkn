@@ -58,16 +58,20 @@
                     @method('DELETE')
 
                     <button type="submit" class="badge badge-sm bg-gradient-danger border-0 cursor-pointer">
-                        Hapus Transaksi
+                        <i class="material-symbols-rounded text-sm ">delete</i>
                     </button>
                 </form>
             @elseif($payment->status == 'success')
                 <a href="{{ route('admin.cetak', ['id' => $payment->id]) }}" class="text-xs font-weight-bold" target="_blank">
-                    <span class="badge badge-sm bg-gradient-warning">Cetak Invoice</span>
+                    <span class="badge badge-sm bg-gradient-warning d-inline-flex align-items-center">
+                        <i class="material-symbols-rounded text-sm me-1">print</i>Invoice
+                    </span>
                 </a>
                 <a href="{{ route('admin.cetak.pendaftaran', ['id' => $payment->id]) }}" class="text-xs font-weight-bold"
                     target="_blank">
-                    <span class="badge badge-sm bg-gradient-success">Cetak Formulir</span>
+                    <span class="badge badge-sm bg-gradient-success d-inline-flex align-items-center">
+                        <i class="material-symbols-rounded text-sm me-1">print</i>Formulir
+                    </span>
                 </a>
             @endif
         </td>

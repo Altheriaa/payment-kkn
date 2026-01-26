@@ -3,35 +3,35 @@
         <td>
             <div class="d-flex px-2 py-1">
                 <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{ $kelompok->jadwalKkn->nama_periode }}</h6>
+                    <h6 class="mb-0 text-sm">{{ $kelompok->jadwalKkn->nama_periode ?? 'N/A' }}</h6>
                 </div>
             </div>
         </td>
         <td>
             <div class="d-flex px-2 py-1">
                 <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{ $kelompok->dosenDpl->nama_dosen }}</h6>
+                    <h6 class="mb-0 text-sm">{{ $kelompok->dosenDpl->nama_dosen ?? 'N/A' }}</h6>
                 </div>
             </div>
         </td>
         <td>
             <div class="d-flex px-2 py-1">
                 <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{ $kelompok->lokasiKkn->nama_desa }}</h6>
+                    <h6 class="mb-0 text-sm">{{ $kelompok->lokasiKkn->nama_desa ?? 'N/A' }}</h6>
                 </div>
             </div>
         </td>
         <td>
             <div class="d-flex px-2 py-1">
                 <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{ $kelompok->nama_kelompok }}</h6>
+                    <h6 class="mb-0 text-sm">{{ $kelompok->nama_kelompok ?? 'N/A' }}</h6>
                 </div>
             </div>
         </td>
         <td>
             <div class="d-flex px-2 py-1">
                 <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{ $kelompok->jenis_kkn }}</h6>
+                    <h6 class="mb-0 text-sm">{{ $kelompok->jenis_kkn ?? 'N/A'}}</h6>
                 </div>
             </div>
         </td>
@@ -65,17 +65,18 @@
             </div>
         </td>
         <td class="align-middle text-center text-sm">
-            <button type="button" class="badge badge-sm bg-gradient-success border-0 cursor-pointer btn-edit">
-                Kelola Anggota
-            </button>
-            <a href="{{ route('admin.plotting.kelola-anggota') }}">Kelola</a>
+            <a href="{{ route('kelolaAnggota', $kelompok->id) }}">
+                <span class="badge badge-sm bg-gradient-success border-0 cursor-pointer btn-edit">
+                    <i class="material-symbols-rounded text-sm ">group</i>
+                </span>
+            </a>
 
             <button type="button" class="badge badge-sm bg-gradient-warning border-0 cursor-pointer btn-edit"
                 data-bs-toggle="modal" data-bs-target="#modalKelompok" data-id="{{ $kelompok->id }}"
                 data-jadwal_kkn_id="{{ $kelompok->jadwal_kkn_id }}" data-dpl_id="{{ $kelompok->dpl_id }}"
                 data-lokasi_kkn_id="{{ $kelompok->lokasi_kkn_id }}" data-nama_kelompok="{{ $kelompok->nama_kelompok }}"
                 data-jenis_kkn="{{ $kelompok->jenis_kkn }}" data-url="{{ route('updateKelompok', $kelompok->id) }}">
-                Edit
+                <i class="material-symbols-rounded text-sm ">edit</i>
             </button>
             <form action="{{ route('hapusKelompok', $kelompok->id) }}" method="POST" style="display: inline-block;"
                 class="form-hapus-kelompok">
@@ -84,9 +85,14 @@
                 @method('DELETE')
 
                 <button type="submit" class="badge badge-sm bg-gradient-danger border-0 cursor-pointer">
-                    Hapus
+                    <i class="material-symbols-rounded text-sm ">delete</i>
                 </button>
             </form>
+            <a href="">
+                <span class="badge badge-sm bg-gradient-success border-0 cursor-pointer btn-edit">
+                    <i class="material-symbols-rounded text-sm ">print</i>
+                </span>
+            </a>
         </td>
     </tr>
 @endforeach

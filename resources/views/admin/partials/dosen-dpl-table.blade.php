@@ -41,7 +41,7 @@
                 data-nuptk="{{ $dosendpl->nuptk }}" data-nama_dosen="{{ $dosendpl->nama_dosen }}"
                 data-prodi="{{ $dosendpl->prodi }}" data-bidang_keahlian="{{ $dosendpl->bidang_keahlian }}"
                 data-no_hp="{{ $dosendpl->no_hp }}" data-url="{{ route('updateDosen', $dosendpl->id) }}">
-                Edit
+                <i class="material-symbols-rounded text-sm ">edit</i>
             </button>
             <form action="{{ route('hapusDosen', $dosendpl->id) }}" method="POST" style="display: inline-block;"
                 class="form-hapus-dosen">
@@ -50,7 +50,7 @@
                 @method('DELETE')
 
                 <button type="submit" class="badge badge-sm bg-gradient-danger border-0 cursor-pointer">
-                    Hapus
+                    <i class="material-symbols-rounded text-sm ">delete</i>
                 </button>
             </form>
         </td>
