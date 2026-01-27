@@ -101,6 +101,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('mahasiswa.plotting') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('mahasiswa.plotting') }}">
+                        <i class="material-symbols-rounded opacity-5">location_on</i>
+                        <span class="nav-link-text ms-2">Plotting Kelompok</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('mahasiswa.profile') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('mahasiswa.profile') }}">
                         <i class="material-symbols-rounded opacity-5">account_circle</i>

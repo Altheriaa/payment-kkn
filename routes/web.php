@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\DosenDplController;
 use App\Http\Controllers\Admin\PlottingController;
 use App\Http\Controllers\Admin\KelolaAnggotaController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Mahasiswa\PlottingMahasiswaController;
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
@@ -65,6 +66,10 @@ Route::middleware(['auth.mahasiswa'])->prefix('mahasiswa')->group(function () {
     // Cetak Form Pendaftaran
     Route::get('/riwayat/cetak/pendaftaran/{id}', [CetakPendaftaran::class, 'cetakPendaftaran']) // Sesuaikan Controller
         ->name('mahasiswa.cetak.pendaftaran');
+
+    // Plotting Mahasiswa
+    Route::get('/plotting', [PlottingMahasiswaController::class, 'index'])->name('mahasiswa.plotting');
+    Route::get('plotting/detail-kelompok/{id}', [PlottingMahasiswaController::class, 'detail'])->name('detailKelompok');
 
     //Profil Mahasiswa
     Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
@@ -121,8 +126,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/plotting/kelola-anggota', [PlottingController::class, 'index'])->name('admin.plotting.kelola-anggota');
     Route::get('plotting/kelola-anggota/detail/{id}', [PlottingController::class, 'kelolaAnggota'])->name('kelolaAnggota');
     Route::put('/plotting/kelola-anggota/sync-anggota/{id}', [PlottingController::class, 'syncAnggota'])->name('syncAnggota');
-    // Route::put('plotting/kelola-anggota/tambah/{id}', [PlottingController::class, 'tambahAnggota'])->name('tambahAnggota');
-    // Route::delete('plotting/kelola-anggota/hapus/{pendaftaranKknId}', [PlottingController::class, 'hapusAnggota'])->name('hapusAnggota');
 
     // Laporan Bulanan
     // Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');

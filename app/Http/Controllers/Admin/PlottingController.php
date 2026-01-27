@@ -163,15 +163,9 @@ class PlottingController extends Controller
             'anggota_ids.*' => 'exists:pendaftaran_kkn,id'
         ]);
 
-        // Langkah 1: Reset Dulu!
-        // Keluarkan SEMUA mahasiswa yang sebelumnya ada di kelompok ini.
-        // Tujuannya agar data bersih sebelum list baru masuk.
         PendaftaranKkn::where('kelompok_kkn_id', $id)
             ->update(['kelompok_kkn_id' => null]);
 
-        // Langkah 2: Masukkan List Baru (Jika ada)
-        // Ambil array ID yang dikirim dari form (input hidden name="member_ids[]")
-        // Lalu set kelompok_kkn_id mereka ke ID kelompok ini.
         if ($request->has('anggota_ids') && !empty($request->anggota_ids)) {
             PendaftaranKkn::whereIn('id', $request->anggota_ids)
                 ->update(['kelompok_kkn_id' => $id]);
