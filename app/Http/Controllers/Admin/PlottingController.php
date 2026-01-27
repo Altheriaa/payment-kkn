@@ -10,6 +10,7 @@ use App\Models\JadwalKkn;
 use App\Models\LokasiKkn;
 use App\Models\PendaftaranKkn;
 use App\Models\Mahasiswa;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class PlottingController extends Controller
@@ -172,5 +173,26 @@ class PlottingController extends Controller
         }
 
         return back()->with('success', 'Perubahan anggota kelompok berhasil disimpan!');
+    }
+
+    // Cetak Laporan Penempatan Kelompok
+    public function cetakLaporanKelompok($id)
+    {
+
+        $kelompok = KelompokKkn::with(['dosenDpl', 'lokasiKkn', 'jadwalKkn'])->findOrFail($id);
+
+        $anggota = PendaftaranKkn::with('mahasiswa')
+            ->where('kelompok_kkn_id', $id)
+            ->get();
+
+        $pdf = Pdf::loadView('admin.plotting.laporan-kelompok-pdf', [
+            'kelompok' => $kelompok,
+            'anggota' => $anggota,
+        ]);
+
+        // 6. Set Ukuran Kertas & Stream
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->stream('Laporan-Plotting-' . $kelompok->nama_kelompok . '.pdf');
     }
 }

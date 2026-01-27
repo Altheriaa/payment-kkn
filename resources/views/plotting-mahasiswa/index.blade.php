@@ -138,6 +138,12 @@
                                                         <i class="material-symbols-rounded text-sm ">info</i>
                                                     </span>
                                                 </a>
+                                                <a href="{{ route('mahasiswa.cetakKelompok', $kelompok->id) }}">
+                                                    <span
+                                                        class="badge badge-sm bg-gradient-success border-0 cursor-pointer btn-edit">
+                                                        <i class="material-symbols-rounded text-sm ">print</i>
+                                                    </span>
+                                                </a>
                                             </td>
                                         </tr>
                                     @else

@@ -70,6 +70,7 @@ Route::middleware(['auth.mahasiswa'])->prefix('mahasiswa')->group(function () {
     // Plotting Mahasiswa
     Route::get('/plotting', [PlottingMahasiswaController::class, 'index'])->name('mahasiswa.plotting');
     Route::get('plotting/detail-kelompok/{id}', [PlottingMahasiswaController::class, 'detail'])->name('detailKelompok');
+    Route::get('/plotting/cetak-kelompok/{id}', [PlottingMahasiswaController::class, 'cetakLaporanKelompok'])->name('mahasiswa.cetakKelompok');
 
     //Profil Mahasiswa
     Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
@@ -126,6 +127,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/plotting/kelola-anggota', [PlottingController::class, 'index'])->name('admin.plotting.kelola-anggota');
     Route::get('plotting/kelola-anggota/detail/{id}', [PlottingController::class, 'kelolaAnggota'])->name('kelolaAnggota');
     Route::put('/plotting/kelola-anggota/sync-anggota/{id}', [PlottingController::class, 'syncAnggota'])->name('syncAnggota');
+    // Cetak Kelompok Hasil Plotting
+    Route::get('/plotting/cetak-kelompok/{id}', [PlottingController::class, 'cetakLaporanKelompok'])->name('cetakKelompok');
 
     // Laporan Bulanan
     // Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');

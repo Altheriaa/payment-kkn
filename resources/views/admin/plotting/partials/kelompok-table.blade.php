@@ -88,7 +88,7 @@
                     <i class="material-symbols-rounded text-sm ">delete</i>
                 </button>
             </form>
-            <a href="">
+            <a href="{{ route('cetakKelompok', $kelompok->id) }}">
                 <span class="badge badge-sm bg-gradient-success border-0 cursor-pointer btn-edit">
                     <i class="material-symbols-rounded text-sm ">print</i>
                 </span>
