@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\DosenDplController;
 use App\Http\Controllers\Admin\PlottingController;
 use App\Http\Controllers\Admin\KelolaAnggotaController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\LaporanJumlahPesertaKknController;
 use App\Http\Controllers\Mahasiswa\PlottingMahasiswaController;
 
 // Landing Page
@@ -129,6 +130,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::put('/plotting/kelola-anggota/sync-anggota/{id}', [PlottingController::class, 'syncAnggota'])->name('syncAnggota');
     // Cetak Kelompok Hasil Plotting
     Route::get('/plotting/cetak-kelompok/{id}', [PlottingController::class, 'cetakLaporanKelompok'])->name('cetakKelompok');
+
+    // Laporan Jumlah Peserta KKN
+    Route::get('/laporan-jumlah-peserta-kkn', [LaporanJumlahPesertaKknController::class, 'index'])->name('admin.laporan.jumlah.peserta');
 
     // Laporan Bulanan
     // Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');

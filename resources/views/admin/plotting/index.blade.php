@@ -14,17 +14,29 @@
                     <div class="card-body p-3">
                         <div
                             class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
-                            <div>
+                            <div class="d-flex flex-wrap align-items-center gap-2">
                                 <button type="button" class="btn bg-gradient-dark mb-0 btn-add" data-bs-toggle="modal"
                                     data-bs-target="#modalKelompok">
                                     <i class="material-symbols-rounded text-sm me-1">add</i> Tambah Kelompok
                                 </button>
-                                <button type="button" class="btn bg-gradient-primary mb-0 btn-add" data-bs-toggle="modal"
-                                    data-bs-target="#modalKelompok">
+                                {{-- <button type="button" class="btn bg-gradient-primary mb-0 btn-add"
+                                    data-bs-toggle="modal" data-bs-target="#modalKelompok">
                                     <i class="material-symbols-rounded text-sm me-1">print</i> Cetak Kelompok Periode
-                                </button>
+                                </button> --}}
                             </div>
-                            <form action="{{ route('admin.plotting') }}" method="GET" class="mb-0">
+                            <form action="{{ route('admin.plotting') }}" method="GET"
+                                class="mb-0 d-flex align-items-center gap-2">
+                                <div class="input-group" style="width: auto;">
+                                    <select name="jadwal_kkn_id" class="form-control px-2 border border-secondary"
+                                        style="height: 39px; width: 200px; border-radius: 8px !important;"
+                                        onchange="window.location.href='{{ route('admin.plotting') }}?jadwal_kkn_id='+this.value">
+                                        @foreach($listJadwal as $jadwal)
+                                            <option value="{{ $jadwal->id }}" {{ $selectedJadwalId == $jadwal->id ? 'selected' : '' }}>
+                                                {{ $jadwal->nama_periode }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }}"
                                     style="min-width: 250px;">
                                     <label class="form-label">Cari Kelompok...</label>
@@ -230,11 +242,15 @@
         $(document).ready(function () {
             $('#searchInput').on('keyup', function () {
                 let search = $(this).val();
+                
+                let jadwalId = $('select[name="jadwal_kkn_id"]').val();
+
                 $.ajax({
                     url: "{{ route('admin.plotting') }}",
                     type: "GET",
                     data: {
                         search: search,
+                        jadwal_kkn_id: jadwalId,
                     },
                     success: function (response) {
                         $('.table-body').html(response);

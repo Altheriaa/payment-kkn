@@ -39,6 +39,9 @@
                             case 'admin.plotting':
                                 $pageTitle = 'Penempatan Mahasiswa';
                                 break;
+                            case 'admin.laporan.jumlah.peserta':
+                                $pageTitle = 'Laporan Jumlah Peserta';
+                                break;
                             default:
                                 $pageTitle = ucfirst(str_replace(['-', '_'], ' ', $routeName)); // Mengubah nama route (misal: 'my-page' menjadi 'My Page')
                                 break;

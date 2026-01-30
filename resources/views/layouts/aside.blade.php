@@ -63,6 +63,13 @@
                         <span class="nav-link-text ms-2">Plotting</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.laporan.jumlah.peserta') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                        href="{{ route('admin.laporan.jumlah.peserta') }}">
+                        <i class="material-symbols-rounded opacity-5">analytics</i>
+                        <span class="nav-link-text ms-2">Laporan Jumlah Peserta</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.laporan.bulanan') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('admin.laporan.bulanan') }}">

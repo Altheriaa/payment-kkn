@@ -17,24 +17,35 @@ class PlottingController extends Controller
 {
     public function index(Request $request)
     {
-        $query = KelompokKkn::query()->with(['jadwalKkn', 'dosenDpl', 'lokasiKkn'])->withCount('pendaftaranKkn');
-        $jadwalKkns = JadwalKkn::where('is_active', true)->get();
-        $dosenDpls = DosenDpl::select('nama_dosen', 'id')->get();
-        $lokasiKkns = LokasiKkn::select('nama_desa', 'id')->get();
+        $listJadwal = JadwalKkn::orderBy('id_siakad', 'desc')->get();
 
+        $query = KelompokKkn::query()->with(['jadwalKkn', 'dosenDpl', 'lokasiKkn'])
+            ->withCount('pendaftaranKkn');
+
+        // Filter Periode
+        if ($request->filled('jadwal_kkn_id')) {
+            $selectedJadwalId = $request->jadwal_kkn_id;
+            $query->where('jadwal_kkn_id', $selectedJadwalId);
+        } else {
+            if ($listJadwal->isNotEmpty()) {
+                $selectedJadwalId = $listJadwal->first()->id;
+                $query->where('jadwal_kkn_id', $selectedJadwalId);
+            } else {
+                $selectedJadwalId = null;
+            }
+        }
+
+        // Filter Pencarian
         if (request()->filled('search')) {
             $search = request()->search;
 
             // query start contition
             $query->where(function ($q) use ($search) {
-                $q->whereHas('jadwalKkn', function ($q2) use ($search) {
-                    $q2->where('nama_periode', 'like', "%$search%");
+                $q->WhereHas('dosenDpl', function ($q2) use ($search) {
+                    $q2->where('nama_dosen', 'like', "%$search%");
                 })
-                    ->orWhereHas('dosenDpl', function ($q3) use ($search) {
-                        $q3->where('nama_dosen', 'like', "%$search%");
-                    })
-                    ->orWhereHas('lokasiKkn', function ($q4) use ($search) {
-                        $q4->where('nama_desa', 'like', "%$search%");
+                    ->orWhereHas('lokasiKkn', function ($q3) use ($search) {
+                        $q3->where('nama_desa', 'like', "%$search%");
                     })
                     ->orWhere('nama_kelompok', 'like', "%$search%")
                     ->orWhere('jenis_kkn', 'like', "%$search%");
@@ -47,7 +58,11 @@ class PlottingController extends Controller
             return view('admin.plotting.partials.kelompok-table', compact('kelompoks'))->render();
         }
 
-        return view('admin.plotting.index', compact('kelompoks', 'jadwalKkns', 'dosenDpls', 'lokasiKkns'));
+        $jadwalKkns = JadwalKkn::where('is_active', true)->get();
+        $dosenDpls = DosenDpl::select('nama_dosen', 'id')->get();
+        $lokasiKkns = LokasiKkn::select('nama_desa', 'id')->get();
+
+    return view('admin.plotting.index', compact('kelompoks', 'jadwalKkns', 'dosenDpls', 'lokasiKkns', 'listJadwal', 'selectedJadwalId'));
     }
 
     public function storeKelompok(Request $request)
@@ -97,7 +112,6 @@ class PlottingController extends Controller
 
     public function deleteKelompok($id)
     {
-
         $kelompok = KelompokKkn::findOrFail($id);
         $kelompok->delete();
 

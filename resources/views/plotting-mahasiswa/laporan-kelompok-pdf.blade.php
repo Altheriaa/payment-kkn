@@ -151,26 +151,6 @@
 
 <body>
 
-    {{-- Corporate Header using Table for Perfect Alignment --}}
-    <div class="corporate-header">
-        <table>
-            <tr>
-                <td class="logo-cell">
-                    {{-- Pastikan path gambar absolut untuk DOMPDF --}}
-                    <img src="{{ public_path('assets/img/unaya.png') }}" alt="Logo UA">
-                </td>
-                <td class="info-cell">
-                    <h1>Universitas Abulyatama</h1>
-                    <h2>Lembaga Penelitian dan Pengabdian Masyarakat (LPPM)</h2>
-                    <div class="address">
-                        Jl. Blang Bintang Lama Km. 8,5 Lampoh Keude, Aceh Besar<br>
-                        Telp: (0651) 23699 | Email: lppm@abulyatama.ac.id | Website: unaya.ac.id
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-
     {{-- Document Title --}}
     <div class="document-title">
         <h3>Laporan Penempatan Kelompok KKN</h3>

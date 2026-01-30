@@ -90,8 +90,21 @@ class PendaftaranController extends Controller
     {
         $request->validate(['jenis_kkn_id' => 'required|integer']);
         $jenisKknIdDipilih = $request->jenis_kkn_id;
-        $jadwalKknId = JadwalKkn::where('tanggal_dibuka', '<=', now())
-            ->where('tanggal_ditutup', '>=', now())->first()->id;
+
+        $jadwalKkn = JadwalKkn::where('is_active', true) //nanti ubah berdasarkan yang aktif
+            ->whereDate('tanggal_dibuka', '<=', now())
+            ->whereDate('tanggal_ditutup', '>=', now())
+            ->orderBy('id_siakad', 'desc')
+            ->first();
+
+        if (!$jadwalKkn) {
+            return response()->json([
+                'message' => 'Tidak ada periode KKN yang sedang dibuka.',
+                'status' => 'failed'
+            ], 400);
+        }
+
+        $jadwalKknId = $jadwalKkn->id;
 
         $mahasiswaData = Session::get('mahasiswa_data');
         $mahasiswaId = $mahasiswaData['id'];

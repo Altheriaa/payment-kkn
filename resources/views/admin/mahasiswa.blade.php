@@ -17,7 +17,7 @@
 
                                 {{-- Dropdown Status --}}
                                 <div class="col-12 col-md-5">
-                                    <div class="input-group input-group-static">
+                                    <div class="input-group">
                                         <select name="status_kkn" class="form-control px-2 border border-secondary"
                                             style="height: 39px; border-radius: 8px !important;">
                                             <option value="">Filter Berdasarkan...</option>
