@@ -133,6 +133,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Laporan Jumlah Peserta KKN
     Route::get('/laporan-jumlah-peserta-kkn', [LaporanJumlahPesertaKknController::class, 'index'])->name('admin.laporan.jumlah.peserta');
+    Route::get('/laporan-jumlah-peserta-kkn/cetak', [LaporanJumlahPesertaKknController::class, 'cetak'])->name('cetakJumlahLaporan');
 
     // Laporan Bulanan
     // Route::get('/laporan-bulanan', [LaporanBulananController::class, 'laporanBulanan'])->name('admin.laporan.bulanan');

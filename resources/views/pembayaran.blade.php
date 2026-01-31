@@ -108,7 +108,7 @@
                       <label class="form-label fw-bold">Pilih Jenis KKN</label>
                       <select id="jenis-kkn" class="form-select border"
                         style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
-                        <option value="">- Memuat Jenis KKN -</option>
+                        <option value=""> Pilih Jenis KKN</option>
 
                         @forelse($jenisKknList as $jenis)
                           <option value="{{ $jenis['id'] }}">
