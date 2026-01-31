@@ -119,7 +119,7 @@
                     </div>
 
                     <div class="col-12 text-end mt-4">
-                      <button id="bayar-button" class="btn btn-success px-3">
+                      <button id="bayar-button" class="btn btn bg-gradient-dark px-3">
                         <i class="material-symbols-rounded me-1">credit_card</i>Bayar
                       </button>
                     </div>

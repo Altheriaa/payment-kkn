@@ -53,7 +53,7 @@ Route::middleware(['auth.mahasiswa'])->prefix('mahasiswa')->group(function () {
     Route::post('kkn/pendaftaran', [BiodataController::class, 'biodata'])->name('mahasiswa.biodata.update');
 
     // Halaman, Pembayaran dan Transaksi
-    Route::get('/kkn', [PendaftaranController::class, 'index'])->name('mahasiswa.pembayaran');
+    Route::get('/kkn/pembayaran', [PendaftaranController::class, 'index'])->name('mahasiswa.pembayaran');
     Route::post('/kkn/pembayaran', [PendaftaranController::class, 'createTransaction'])->name('mahasiswa.pembayaran.daftar');
 
     // Cancel Transaksi

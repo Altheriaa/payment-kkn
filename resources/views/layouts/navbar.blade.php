@@ -13,7 +13,24 @@
                         // Map route names to user-friendly titles
                         switch ($routeName) {
                             // Case Mahasiswa
-
+                            case 'mahasiswa.dashboard':
+                                $pageTitle = 'Dashboard';
+                                break;
+                            case 'mahasiswa.biodata.index':
+                                $pageTitle = 'Biodata';
+                                break;
+                            case 'mahasiswa.pembayaran':
+                                $pageTitle = 'Pembayaran';
+                                break;
+                            case 'mahasiswa.riwayat':
+                                $pageTitle = 'Riwayat Transaksi';
+                                break;
+                            case 'mahasiswa.plotting':
+                                $pageTitle = 'Penempatan Kelompok';
+                                break;
+                            case 'mahasiswa.profile':
+                                $pageTitle = 'Profile';
+                                break;
                             // Case Admin
                             case 'admin.dashboard':
                                 $pageTitle = 'Dashboard';
@@ -150,11 +167,19 @@
                         </li>
                     </ul> --}}
                 </li>
-                <li class="nav-item d-flex align-items-center">
-                    <a href="{{ route('mahasiswa.profile') }}" class="nav-link text-body font-weight-bold px-0">
-                        <i class="material-symbols-rounded">account_circle</i>
-                    </a>
-                </li>
+                @if (Auth::user())
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="" class="nav-link text-body font-weight-bold px-0">
+                            <i class="material-symbols-rounded">account_circle</i>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="{{ route('mahasiswa.profile') }}" class="nav-link text-body font-weight-bold px-0">
+                            <i class="material-symbols-rounded">account_circle</i>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

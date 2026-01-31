@@ -19,7 +19,7 @@
                                     data-bs-target="#modalKelompok">
                                     <i class="material-symbols-rounded text-sm me-1">add</i> Tambah Kelompok
                                 </button> --}}
-                                <button type="button" class="btn bg-gradient-primary mb-0 btn-add" data-bs-toggle="modal"
+                                <button type="button" class="btn bg-gradient-dark mb-0 btn-add" data-bs-toggle="modal"
                                     data-bs-target="#modalKelompok">
                                     <i class="material-symbols-rounded text-sm me-1">print</i> Cetak Kelompok
                                 </button>

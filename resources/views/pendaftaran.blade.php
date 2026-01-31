@@ -113,7 +113,7 @@
 
                                                     <!-- Tombol Submit -->
                                                     <div class="col-12 text-end mt-4">
-                                                        <button type="submit" class="btn btn-primary px-3">
+                                                        <button type="submit" class="btn bg-gradient-dark px-3">
                                                             <i class="material-symbols-rounded text-white me-2">save</i>Simpan Biodata
                                                         </button>
                                                     </div>
@@ -231,7 +231,7 @@
 
                                                     <!-- Tombol Submit -->
                                                     <div class="col-12 text-end mt-4">
-                                                        <button type="submit" class="btn btn-primary px-3 text-white" disabled>
+                                                        <button type="submit" class="btn bg-gradient-dark px-3 text-white" disabled>
                                                             <i class="material-symbols-rounded text-white me-2">save</i>Simpan Biodata
                                                         </button>
                                                     </div>
