@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Mahasiswa;
 use App\Models\Payment;
 use App\Models\JadwalKkn;
+use App\Models\PendaftaranKkn;
 use Illuminate\Http\Request;
 
 class DashboardAdminController extends Controller
@@ -16,6 +17,7 @@ class DashboardAdminController extends Controller
         // count mahasiswa
         $mahasiswaCount = Mahasiswa::count();
         $transaksiCount = Payment::count();
+        $pendaftarPeriode = PendaftaranKkn::where('status_pendaftaran', 'valid')->count();
 
         $jadwal_kkn = JadwalKkn::where('is_active', true)->first();
 
@@ -46,6 +48,7 @@ class DashboardAdminController extends Controller
             'mahasiswaCount' => $mahasiswaCount,
             'totalAktif' => $totalAktif,
             'transaksiCount' => $transaksiCount,
+            'pendaftarPeriode' => $pendaftarPeriode,
         ]);
     }
 }

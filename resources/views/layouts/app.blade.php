@@ -8,7 +8,7 @@
         Sistem KKN Unaya
     </title>
     <!-- App favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/Unaya.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/Logo Unaya.png') }}">
     <meta name="theme-color" content="#43A047">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"

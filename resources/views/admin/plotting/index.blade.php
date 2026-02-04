@@ -19,16 +19,12 @@
                                     data-bs-target="#modalKelompok">
                                     <i class="material-symbols-rounded text-sm me-1">add</i> Tambah Kelompok
                                 </button>
-                                {{-- <button type="button" class="btn bg-gradient-primary mb-0 btn-add"
-                                    data-bs-toggle="modal" data-bs-target="#modalKelompok">
-                                    <i class="material-symbols-rounded text-sm me-1">print</i> Cetak Kelompok Periode
-                                </button> --}}
                             </div>
                             <form action="{{ route('admin.plotting') }}" method="GET"
-                                class="mb-0 d-flex align-items-center gap-2">
+                                class="mb-0 d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 w-100 w-md-auto">
                                 <div class="input-group" style="width: auto;">
-                                    <select name="jadwal_kkn_id" class="form-control px-2 border border-secondary"
-                                        style="height: 39px; width: 200px; border-radius: 8px !important;"
+                                    <select name="jadwal_kkn_id" class="form-control px-2 border border-secondary w-100"
+                                        style="height: 39px; min-width: 200px; border-radius: 8px !important;"
                                         onchange="window.location.href='{{ route('admin.plotting') }}?jadwal_kkn_id='+this.value">
                                         @foreach($listJadwal as $jadwal)
                                             <option value="{{ $jadwal->id }}" {{ $selectedJadwalId == $jadwal->id ? 'selected' : '' }}>
@@ -37,7 +33,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }}"
+                                <div class="input-group input-group-outline {{ request('search') ? 'is-filled' : '' }} w-100"
                                     style="min-width: 250px;">
                                     <label class="form-label">Cari Kelompok...</label>
                                     <input type="text" class="form-control" id="searchInput" name="search"

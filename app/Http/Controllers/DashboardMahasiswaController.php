@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\JadwalKkn;
 
 class DashboardMahasiswaController extends Controller
 {
@@ -11,21 +12,9 @@ class DashboardMahasiswaController extends Controller
     {
         $siakadApiUrl = 'https://mini-siakad.cloud/api/jadwal-kkn';
         $secretKeySiakad = env('SYSTEM_API_KEY');
-        $jadwal_kkn = [];
 
-        try {
-            // UBAH BAGIAN INI: Tambahkan withHeaders()
-            $response = Http::withHeaders([
-                'X-SYSTEM-KEY' => $secretKeySiakad,
-                'Accept' => 'application/json'
-            ])->get($siakadApiUrl);
-            // AKHIR PERUBAHAN
-
-            if ($response->successful()) {
-                $jadwal_kkn = $response->json()['data'] ?? [];
-            }
-        } catch (\Exception $e) {
-        }
+        // Jadwal Hasil Sinkron Lokal
+        $jadwal_kkn = JadwalKkn::where('is_active', true)->first();
 
         // panggil Api endpoinst jenis kkn 
         $siakadApiUrl = 'https://mini-siakad.cloud/api/kkn/jenis';

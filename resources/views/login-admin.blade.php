@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/Logo Unaya.png') }}">
     <title>
         Login Admin - Sistem KKN Unaya
     </title>
@@ -31,18 +31,20 @@
         <div class="relative min-vh-100 flex items-center">
             {{-- Background Image with Blur --}}
             <div class="absolute inset-0 bg-cover bg-center blur-sm"
-                style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
+                style="background-image: url('/assets/img/Biro Abulyatama.webp');">
             </div>
             {{-- Dark Overlay --}}
             <div class="absolute inset-0 bg-gradient-dark opacity-6"></div>
 
             {{-- Login Form Content --}}
-            <div class="container my-auto relative z-10">
+            <div class="container my-auto relative z-10 p-4">
                 <div class="row">
                     <div class="col-lg-4 col-md-8 col-12 mx-auto">
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+                                    <img src="{{ asset('assets/img/Logo Unaya.png') }}" alt=""
+                                        class="w-10 h-10 mx-auto">
                                     <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Login Admin</h4>
                                     <h5 class="text-white font-weight-bolder text-center mt-2 mb-0">Sistem
                                         KKN Unaya</h4>
