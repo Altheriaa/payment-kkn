@@ -12,11 +12,11 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <p class="text-sm mb-0 text-capitalize">Semester</p>
-                                <h4 class="mb-0">{{ $jadwal_kkn->nama_periode ?? '' }}</h4>
+                                <h5 class="mb-0">{{ $jadwal_kkn_dash->nama_periode ?? '' }}</h5>
                             </div>
                             <div
                                 class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                                <i class="material-symbols-rounded opacity-10">person</i>
+                                <i class="material-symbols-rounded opacity-10">calendar_month</i>
                             </div>
                         </div>
                     </div>

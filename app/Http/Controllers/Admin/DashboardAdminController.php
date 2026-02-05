@@ -20,6 +20,7 @@ class DashboardAdminController extends Controller
         $pendaftarPeriode = PendaftaranKkn::where('status_pendaftaran', 'valid')->count();
 
         $jadwal_kkn = JadwalKkn::where('is_active', true)->first();
+        $jadwal_kkn_dash = JadwalKkn::orderBy('id', 'desc')->first();
 
         // panggil Api endpoinst jenis kkn 
         $siakadApiUrl = 'https://mini-siakad.cloud/api/kkn/jenis';
@@ -44,6 +45,7 @@ class DashboardAdminController extends Controller
 
         return view('admin.dashboard', [
             'jadwal_kkn' => $jadwal_kkn,
+            'jadwal_kkn_dash' => $jadwal_kkn_dash,
             'jenisKknList' => $jenisKknList,
             'mahasiswaCount' => $mahasiswaCount,
             'totalAktif' => $totalAktif,
