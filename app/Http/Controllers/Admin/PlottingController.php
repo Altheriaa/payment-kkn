@@ -152,20 +152,13 @@ class PlottingController extends Controller
             // query start contition
             $queryKandidat->where(function ($q) use ($search) {
                 $q->whereHas('mahasiswa', function ($q2) use ($search) {
-                    $q2->where('nama', 'like', "%$search%");
-                })
-                    ->orWhereHas('mahasiswa', function ($q3) use ($search) {
-                        $q3->where('nim', 'like', "%$search%");
-                    })
-                    ->orWhereHas('mahasiswa', function ($q4) use ($search) {
-                        $q4->where('email', 'like', "%$search%");
-                    })
-                    ->orWhereHas('mahasiswa', function ($q5) use ($search) {
-                        $q5->where('fakultas', 'like', "%$search%");
-                    })
-                    ->orWhereHas('mahasiswa', function ($q6) use ($search) {
-                        $q6->where('prodi', 'like', "%$search%");
-                    });
+                    $q2->where('nama', 'like', "%$search%")
+                        ->orWhere('nim', 'like', "%$search%")
+                        ->orWhere('email', 'like', "%$search%")
+                        ->orWhere('prodi', 'like', "%$search%")
+                        ->orWhere('fakultas', 'like', "%$search%")
+                        ->orWhere('prodi', 'like', "%$search%");
+                });
             });
         }
 

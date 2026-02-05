@@ -11,8 +11,8 @@
                     <div class="card-header p-2 ps-3">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <p class="text-sm mb-0 text-capitalize">Jumlah Pendaftar</p>
-                                <h4 class="mb-0">{{ $pendaftarPeriode }}</h4>
+                                <p class="text-sm mb-0 text-capitalize">Semester</p>
+                                <h4 class="mb-0">{{ $jadwal_kkn->nama_periode ?? '' }}</h4>
                             </div>
                             <div
                                 class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">

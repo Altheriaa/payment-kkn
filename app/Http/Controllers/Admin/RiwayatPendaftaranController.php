@@ -19,8 +19,10 @@ class RiwayatPendaftaranController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('order_id', 'like', "%$search%")
                     ->orWhereHas('mahasiswa', function ($m) use ($search) {
-                        $m->where('nama', 'like', "%$search%")
-                            ->orWhere('nim', 'like', "%$search%");
+                        $m->where(function ($m2) use ($search) {
+                            $m2->where('nama', 'like', "%$search%")
+                                ->orWhere('nim', 'like', "%$search%");
+                        });
                     });
             });
         }

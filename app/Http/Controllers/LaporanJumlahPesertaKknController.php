@@ -67,30 +67,26 @@ class LaporanJumlahPesertaKknController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->whereHas('mahasiswa', function ($q2) use ($search) {
-                    $q2->where('nama', 'like', "%$search%");
-                })->orWhereHas('mahasiswa', function ($q3) use ($search) {
-                    $q3->where('nim', 'like', "%$search%");
+                    $q2->where('nama', 'like', "%$search%")
+                        ->orWhere('nim', 'like', "%$search%");
                 });
             });
         }
 
+        // Hitung manual pakai Collection (RAM) biar ga nembak database 8x
         $pendaftarans = $query->get();
 
-        if ($request->ajax()) {
-            return view('admin.laporan-jumlah.partials.laporan-jumlah-table', compact('pendaftarans'))->render();
-        }
-
-        $countTeknik = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Teknik'))->count();
-        $countPertanian = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Pertanian'))->count();
-        $countPerikanan = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Perikanan'))->count();
-        $countKesmas = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Kesehatan Masyarakat'))->count();
-        $countFkip = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Keguruan dan Ilmu Pendidikan'))->count();
-        $countEkonomi = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Ekonomi'))->count();
-        $countKedokteran = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Kedokteran'))->count();
-        $countHukum = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Hukum'))->count();
+        $countTeknik = $pendaftarans->where('mahasiswa.fakultas', 'Teknik')->count();
+        $countPertanian = $pendaftarans->where('mahasiswa.fakultas', 'Pertanian')->count();
+        $countPerikanan = $pendaftarans->where('mahasiswa.fakultas', 'Perikanan')->count();
+        $countKesmas = $pendaftarans->where('mahasiswa.fakultas', 'Kesehatan Masyarakat')->count();
+        $countFkip = $pendaftarans->where('mahasiswa.fakultas', 'Keguruan dan Ilmu Pendidikan')->count();
+        $countEkonomi = $pendaftarans->where('mahasiswa.fakultas', 'Ekonomi')->count();
+        $countKedokteran = $pendaftarans->where('mahasiswa.fakultas', 'Kedokteran')->count();
+        $countHukum = $pendaftarans->where('mahasiswa.fakultas', 'Hukum')->count();
 
         // Jumlah Per jenis KKN
-        $countTotal = (clone $query)->count();
+        $countTotal = $pendaftarans->count();
 
         return view('admin.laporan-jumlah.laporan-jumlah-peserta-kkn', compact(
             'pendaftarans',
@@ -164,14 +160,14 @@ class LaporanJumlahPesertaKknController extends Controller
 
         $namaPeriode = $listJadwal->where('id', $selectedJadwalId)->first()->nama_periode ?? '-';
 
-        $countTeknik = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Teknik'))->count();
-        $countPertanian = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Pertanian'))->count();
-        $countPerikanan = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Perikanan'))->count();
-        $countKesmas = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Kesehatan Masyarakat'))->count();
-        $countFkip = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Keguruan dan Ilmu Pendidikan'))->count();
-        $countEkonomi = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Ekonomi'))->count();
-        $countKedokteran = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Kedokteran'))->count();
-        $countHukum = (clone $query)->whereHas('mahasiswa', fn($q) => $q->where('fakultas', 'Hukum'))->count();
+        $countTeknik = $pendaftarans->where('mahasiswa.fakultas', 'Teknik')->count();
+        $countPertanian = $pendaftarans->where('mahasiswa.fakultas', 'Pertanian')->count();
+        $countPerikanan = $pendaftarans->where('mahasiswa.fakultas', 'Perikanan')->count();
+        $countKesmas = $pendaftarans->where('mahasiswa.fakultas', 'Kesehatan Masyarakat')->count();
+        $countFkip = $pendaftarans->where('mahasiswa.fakultas', 'Keguruan dan Ilmu Pendidikan')->count();
+        $countEkonomi = $pendaftarans->where('mahasiswa.fakultas', 'Ekonomi')->count();
+        $countKedokteran = $pendaftarans->where('mahasiswa.fakultas', 'Kedokteran')->count();
+        $countHukum = $pendaftarans->where('mahasiswa.fakultas', 'Hukum')->count();
 
         $pdf = Pdf::loadView('admin.laporan-jumlah.cetak-laporan-jumlah', [
             'pendaftarans' => $pendaftarans,
