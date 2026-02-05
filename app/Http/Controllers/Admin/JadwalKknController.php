@@ -61,6 +61,7 @@ class JadwalKknController extends Controller
                         ]
                     );
                 }
+                // dump($response);
                 return back()->with('success', 'Data Semester berhasil diperbarui!');
             }
         } catch (\Exception $e) {

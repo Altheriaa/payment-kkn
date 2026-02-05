@@ -9,8 +9,8 @@ use App\Models\KelompokKkn;
 use App\Models\JadwalKkn;
 use App\Models\LokasiKkn;
 use App\Models\PendaftaranKkn;
-use App\Models\Mahasiswa;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Validation\Rule;
 
 
 class PlottingController extends Controller
@@ -62,7 +62,7 @@ class PlottingController extends Controller
         $dosenDpls = DosenDpl::select('nama_dosen', 'id')->get();
         $lokasiKkns = LokasiKkn::select('nama_desa', 'id')->get();
 
-    return view('admin.plotting.index', compact('kelompoks', 'jadwalKkns', 'dosenDpls', 'lokasiKkns', 'listJadwal', 'selectedJadwalId'));
+        return view('admin.plotting.index', compact('kelompoks', 'jadwalKkns', 'dosenDpls', 'lokasiKkns', 'listJadwal', 'selectedJadwalId'));
     }
 
     public function storeKelompok(Request $request)
@@ -75,8 +75,21 @@ class PlottingController extends Controller
 
         $data = $request->validate([
             'jadwal_kkn_id' => 'required|exists:jadwal_kkn,id',
-            'dpl_id' => 'required|exists:dosen_dpl,id|unique:kelompok_kkn,dpl_id,except,id',
-            'lokasi_kkn_id' => 'required|exists:lokasi_kkn,id|unique:kelompok_kkn,lokasi_kkn_id,except,id',
+            'dpl_id' => [
+                'required',
+                'exists:dosen_dpl,id',
+                Rule::unique('kelompok_kkn', 'dpl_id')
+                    ->where(function ($query) use ($request) {
+                        return $query->where('jadwal_kkn_id', $request->jadwal_kkn_id);
+                    })
+                    ->ignore($request->id), // Abaikan ID ini jika sedang edit data
+            ],
+            'lokasi_kkn_id' => 'required|exists:lokasi_kkn,id',
+            Rule::unique('kelompok_kkn', 'lokasi_kkn_id')
+                ->where(function ($query) use ($request) {
+                    return $query->where('lokasi_kkn_id', $request->lokasi_kkn_id);
+                })
+                ->ignore($request->id), // Abaikan ID ini jika sedang edit data
             'nama_kelompok' => 'string|required|max:50',
             'jenis_kkn' => 'required|string|in:KKN-UNAYA Regular,KKN-UNAYA Non-Regular',
         ], [

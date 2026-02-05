@@ -14,8 +14,6 @@ use Midtrans\Snap;
 use Midtrans\Transaction;
 use Illuminate\Support\Facades\Log;
 
-use function PHPSTORM_META\map;
-
 class PendaftaranController extends Controller
 {
     public function index()
@@ -91,7 +89,7 @@ class PendaftaranController extends Controller
         $request->validate(['jenis_kkn_id' => 'required|integer']);
         $jenisKknIdDipilih = $request->jenis_kkn_id;
 
-        $jadwalKkn = JadwalKkn::where('is_active', true) //nanti ubah berdasarkan yang aktif
+        $jadwalKkn = JadwalKkn::where('is_active', true)
             ->whereDate('tanggal_dibuka', '<=', now())
             ->whereDate('tanggal_ditutup', '>=', now())
             ->orderBy('id_siakad', 'desc')
@@ -172,10 +170,7 @@ class PendaftaranController extends Controller
             'customer_details' => [
                 'first_name' => $mahasiswaData['name'],
                 'email' => $mahasiswaData['email'] ?? $mahasiswaData['nim'] . '@example.com',
-            ],
-            // 'callbacks' => [
-            //     'finish' => 'http://127.0.0.1:8000/payment/finish', // Ganti dengan route kamu
-            // ]
+            ]
         ];
 
         $snapToken = Snap::getSnapToken($midtransParams);
