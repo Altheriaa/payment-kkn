@@ -13,7 +13,7 @@ class JadwalKknController extends Controller
 {
     public function index()
     {
-        $jadwalkkn = JadwalKkn::orderBy('id_siakad', 'desc')->get();
+        $jadwalkkn = JadwalKkn::orderBy('id_siakad', 'desc')->first();
 
         return view('admin.jadwal-kkn', compact('jadwalkkn'));
     }
