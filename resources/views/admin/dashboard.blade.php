@@ -135,14 +135,14 @@
                                         {{-- Kolom Tanggal Dibuka (Ini sudah benar) --}}
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-xs font-weight-bold">
-                                                {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_dibuka'])->format('d M Y') }}
+                                                {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_dibuka'])->format('d M Y') ?? '-' }}
                                             </span>
                                         </td>
 
                                         {{-- Kolom Tanggal Ditutup (Ini sudah benar) --}}
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-xs font-weight-bold">
-                                                {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_ditutup'])->format('d M Y') }}
+                                                {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_ditutup'])->format('d M Y') ?? '-' }}
                                             </span>
                                         </td>
 

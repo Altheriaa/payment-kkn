@@ -73,8 +73,11 @@ class LaporanJumlahPesertaKknController extends Controller
             });
         }
 
-        // Hitung manual pakai Collection (RAM) biar ga nembak database 8x
-        $pendaftarans = $query->get();
+        $pendaftarans = $query->orderBy('created_at', 'desc')->paginate(20);
+        
+        if ($request->ajax()) {
+            return view('admin.laporan-jumlah.partials.laporan-jumlah-table', compact('pendaftarans'))->render();
+        }
 
         $countTeknik = $pendaftarans->where('mahasiswa.fakultas', 'Teknik')->count();
         $countPertanian = $pendaftarans->where('mahasiswa.fakultas', 'Pertanian')->count();

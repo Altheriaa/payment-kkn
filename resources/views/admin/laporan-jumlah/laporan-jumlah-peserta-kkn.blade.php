@@ -135,12 +135,11 @@
                                 </thead>
                                 <tbody class="table-body">
                                     @include('admin.laporan-jumlah.partials.laporan-jumlah-table')
-                                </tbody>
+                            </tbody>
                             </table>
                             {{-- Pagination Links --}}
                             <div class="d-flex justify-content-center mt-3 mb-4">
-                                {{-- {{ $kelompoks->appends(request()->query())->links('vendor.pagination.simple-dark') }}
-                                --}}
+                                {{ $pendaftarans->appends(request()->query())->links('vendor.pagination.simple-dark') }}
                             </div>
                         </div>
                     </div>

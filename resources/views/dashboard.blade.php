@@ -324,7 +324,7 @@
 
     {{-- error/success/warning handle sweet alert --}}
     <script>
-        @if(session('success'))
+        @if (session('success'))
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
@@ -337,7 +337,7 @@
                 },
                 timer: 2000
             });
-        @elseif (session('warning'))
+        @elseif(session('warning'))
             Swal.fire({
                 icon: 'warning',
                 text: "{{ session('warning') }}",
@@ -351,7 +351,7 @@
             });
         @endif
 
-        @if($errors->any())
+        @if ($errors->any())
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
