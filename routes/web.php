@@ -126,7 +126,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::put('/plotting-kelompok/update/{id}', [PlottingController::class, 'updateKelompok'])->name('updateKelompok');
     // Kelola Anggota
     Route::get('/plotting/kelola-anggota', [PlottingController::class, 'index'])->name('admin.plotting.kelola-anggota');
-    Route::get('plotting/kelola-anggota/detail/{id}', [PlottingController::class, 'kelolaAnggota'])->name('kelolaAnggota');
+    Route::get('plotting/kelola-anggota/detail/{id}', [PlottingController::class, 'kelolaAnggota'])->name('admin.plotting.kelolaAnggota');
     Route::put('/plotting/kelola-anggota/sync-anggota/{id}', [PlottingController::class, 'syncAnggota'])->name('syncAnggota');
     // Cetak Kelompok Hasil Plotting
     Route::get('/plotting/cetak-kelompok/{id}', [PlottingController::class, 'cetakLaporanKelompok'])->name('cetakKelompok');

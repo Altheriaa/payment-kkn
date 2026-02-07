@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('admin.plotting') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
+                    <a class="nav-link {{ request()->routeIs('admin.plotting') || request()->routeIs('admin.plotting.*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('admin.plotting') }}">
                         <i class="material-symbols-rounded opacity-5">group_add</i>
                         <span class="nav-link-text ms-2">Plotting</span>

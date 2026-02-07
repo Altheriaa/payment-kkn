@@ -310,29 +310,29 @@
                 // BUAT HTML BARIS BARU
                 // Perhatikan: name="anggota_ids[]" sesuai controller
                 let newRow = `
-                                            <tr data-id="${id}" class="bg-gray-100">
-                                                <input type="hidden" name="anggota_ids[]" value="${id}">
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div>
-                                                            <div class="avatar avatar-sm me-3 bg-gradient-dark rounded-circle">
-                                                                <span class="text-white text-xs font-weight-bold">${initials}</span>
+                                                <tr data-id="${id}" class="bg-gray-100">
+                                                    <input type="hidden" name="anggota_ids[]" value="${id}">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div>
+                                                                <div class="avatar avatar-sm me-3 bg-gradient-dark rounded-circle">
+                                                                    <span class="text-white text-xs font-weight-bold">${initials}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm">${name}</h6>
+                                                                <p class="text-xs text-secondary mb-0">${nim} • ${prodi}</p>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">${name}</h6>
-                                                            <p class="text-xs text-secondary mb-0">${nim} • ${prodi}</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle text-center text-sm">${badgeKendaraan}</td>
-                                                <td class="align-middle text-center">
-                                                    <button type="button" class="btn btn-link text-danger text-gradient p-0 mb-0 btn-kick">
-                                                        <i class="material-symbols-rounded text-lg">delete</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        `;
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">${badgeKendaraan}</td>
+                                                    <td class="align-middle text-center">
+                                                        <button type="button" class="btn btn-link text-danger text-gradient p-0 mb-0 btn-kick">
+                                                            <i class="material-symbols-rounded text-lg">delete</i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            `;
 
                 // Hapus row "Belum ada anggota" jika ada
                 $('#empty-row').remove();
@@ -410,7 +410,7 @@
             $('#searchInput').on('keyup', function () {
                 let search = $(this).val();
                 $.ajax({
-                    url: "{{ route('kelolaAnggota', $kelompok->id) }}",
+                    url: "{{ route('admin.plotting.kelolaAnggota', $kelompok->id) }}",
                     type: "GET",
                     data: {
                         search: search,

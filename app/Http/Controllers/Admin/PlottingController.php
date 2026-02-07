@@ -52,15 +52,15 @@ class PlottingController extends Controller
             });
         }
 
+        $jadwalKkns = JadwalKkn::where('is_active', true)->get();
+        $dosenDpls = DosenDpl::select('nama_dosen', 'id')->get();
+        $lokasiKkns = LokasiKkn::select('nama_desa', 'id')->get();
+
         $kelompoks = $query->orderBy('created_at', 'desc')->paginate(5);
 
         if ($request->ajax()) {
             return view('admin.plotting.partials.kelompok-table', compact('kelompoks'))->render();
         }
-
-        $jadwalKkns = JadwalKkn::where('is_active', true)->get();
-        $dosenDpls = DosenDpl::select('nama_dosen', 'id')->get();
-        $lokasiKkns = LokasiKkn::select('nama_desa', 'id')->get();
 
         return view('admin.plotting.index', compact('kelompoks', 'jadwalKkns', 'dosenDpls', 'lokasiKkns', 'listJadwal', 'selectedJadwalId'));
     }

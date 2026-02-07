@@ -65,7 +65,7 @@
             </div>
         </td>
         <td class="align-middle text-center text-sm">
-            <a href="{{ route('kelolaAnggota', $kelompok->id) }}">
+            <a href="{{ route('admin.plotting.kelolaAnggota', $kelompok->id) }}">
                 <span class="badge badge-sm bg-gradient-success border-0 cursor-pointer btn-edit">
                     <i class="material-symbols-rounded text-sm ">group</i>
                 </span>
