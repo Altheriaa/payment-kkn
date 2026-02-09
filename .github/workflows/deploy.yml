@@ -1,0 +1,42 @@
+name: Deploy Sistem KKN to Hostinger
+
+on:
+  push:
+    branches:
+      - main # Ganti jika branch utama kamu bernama 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          script: |
+            # Masuk ke folder project (SESUAIKAN path ini dengan path di Hostinger kamu)
+            cd /home/${{ secrets.HOSTINGER_USER }}/domains/namadomain.com/public_html
+
+            # 1. Aktifkan Maintenance Mode (opsional tapi disarankan)
+            php artisan down
+
+            # 2. Tarik perubahan terbaru dari Git
+            git pull origin main
+
+            # 3. Install dependensi PHP (Composer)
+            /usr/bin/composer install --no-interaction --prefer-dist --optimize-autoloader
+
+            # 4. Jalankan Migrasi Database (wajib untuk Siakad jika ada perubahan tabel)
+            php artisan migrate --force
+
+            # 5. Bersihkan dan Cache Config/Route/View (Optimasi Laravel)
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            # 7. Matikan Maintenance Mode
+            php artisan up
