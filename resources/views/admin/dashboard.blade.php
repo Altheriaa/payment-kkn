@@ -150,11 +150,11 @@
 
                                         {{-- Kolom Status (Baru, karena datanya ada) --}}
                                         <td class="align-middle text-center text-sm">
-                                            @if ($jadwal_kkn->is_active == true)
-                                                <span class="badge badge-sm bg-gradient-success">Dibuka</span>
+                                            {{-- @if ($jadwal_kkn->is_active == true)
+                                            <span class="badge badge-sm bg-gradient-success">Dibuka</span>
                                             @else
-                                                <span class="badge badge-sm bg-gradient-secondary">Ditutup</span>
-                                            @endif
+                                            <span class="badge badge-sm bg-gradient-secondary">Ditutup</span>
+                                            @endif --}}
                                         </td>
                                     </tr>
                                 </tbody>
