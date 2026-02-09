@@ -129,7 +129,11 @@
                                             <div class="d-flex px-2 py-1 ps-3">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $jadwal_kkn->nama_periode ?? '' }}
+                                                        @if($jadwal_kkn)
+                                                            {{ $jadwal_kkn->nama_periode }}
+                                                        @else
+                                                            Tidak Ada Jadwal
+                                                        @endif
                                                     </h6>
                                                 </div>
                                             </div>
@@ -138,23 +142,36 @@
                                         {{-- Kolom Tanggal Dibuka (Ini sudah benar) --}}
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-xs font-weight-bold">
-                                                {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_dibuka'])->format('d M Y') }}
+                                                @if($jadwal_kkn)
+                                                    {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_dibuka'])->format('d M Y') }}
+                                                @else
+                                                    -
+                                                @endif
                                             </span>
                                         </td>
 
                                         {{-- Kolom Tanggal Ditutup (Ini sudah benar) --}}
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-xs font-weight-bold">
-                                                {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_ditutup'])->format('d M Y') }}
+                                                @if($jadwal_kkn)
+                                                    {{ \Carbon\Carbon::parse($jadwal_kkn['tanggal_ditutup'])->format('d M Y') }}
+                                                @else
+                                                    -
+                                                @endif
                                             </span>
                                         </td>
 
                                         {{-- Kolom Status (Baru, karena datanya ada) --}}
                                         <td class="align-middle text-center text-sm">
-                                            @if ($jadwal_kkn->is_active == true)
-                                                <span class="badge badge-sm bg-gradient-success">Dibuka</span>
+                                            @if($jadwal_kkn)
+                                                <span class="badge badge-sm bg-gradient-secondary">Belum Dibuka</span>
+                                                @if ($jadwal_kkn->is_active == true)
+                                                    <span class="badge badge-sm bg-gradient-success">Dibuka</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-secondary">Ditutup</span>
+                                                @endif
                                             @else
-                                                <span class="badge badge-sm bg-gradient-secondary">Ditutup</span>
+                                                <span class="badge badge-sm bg-gradient-secondary">Tidak Ada Jadwal</span>
                                             @endif
                                         </td>
                                     </tr>
