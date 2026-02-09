@@ -18,7 +18,7 @@ jobs:
           port: ${{ secrets.HOSTINGER_PORT }}
           script: |
             # Masuk ke folder project (SESUAIKAN path ini dengan path di Hostinger kamu)
-            cd /home/${{ secrets.HOSTINGER_USER }}/domains/namadomain.com/public_html
+            cd /home/${{ secrets.HOSTINGER_USER }}/domains/altheria.my.id/public_html/payment-kkn
 
             # 1. Aktifkan Maintenance Mode (opsional tapi disarankan)
             php artisan down
