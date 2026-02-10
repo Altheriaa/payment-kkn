@@ -82,6 +82,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Dashboard Admin
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
+    // Sync Mahasiswa From Siakad
+    Route::get('/sync-mahasiswa', [DashboardAdminController::class, 'syncMahasiswa'])->name('admin.sync-mahasiswa');
+
     // Route mahasiswa
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.admin');
 

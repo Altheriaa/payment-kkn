@@ -237,6 +237,26 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- button sync maahasiswa --}}
+                <div class="card mt-2">
+                    {{-- Jadwal KKN --}}
+                    <div class="card-header pb-0">
+                        <div class="row p-4">
+                            <div class="d-flex justify-content-center">
+                                <form action="{{ route('admin.sync-mahasiswa') }}" method="GET">
+                                    <button class="btn btn-lg btn-dark text-lg">
+                                        <i class="material-symbols-rounded">sync</i>
+                                        Sync Mahasiswa
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Table Biaya KKN --}}
+                </div>
+                {{-- end sync --}}
+
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
