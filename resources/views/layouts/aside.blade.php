@@ -24,8 +24,8 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('mahasiswa.admin') || request()->routeIs('mahasiswa.admin.*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}"
                         href="{{ route('mahasiswa.admin') }}">
-                        <i class="material-symbols-rounded opacity-5">group_add</i>
-                        <span class="nav-link-text ms-2">Plotting</span>
+                        <i class="material-symbols-rounded opacity-5">group</i>
+                        <span class="nav-link-text ms-2">Mahasiswa</span>
                     </a>
                 </li>
                 <li class="nav-item">
