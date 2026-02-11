@@ -89,7 +89,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.admin');
 
     // Lihat Detail Mahasiswa 
-    Route::get('mahasiswa/detail/{id}', [MahasiswaController::class, 'detail'])->name('mahasiswa.detail');
+    Route::get('mahasiswa/detail/{id}', [MahasiswaController::class, 'detail'])->name('mahasiswa.admin.detail');
 
     // Riwayat Transaksi
     Route::get('/riwayat-transaksi', [RiwayatPendaftaranController::class, 'riwayatTransaksi'])->name('admin.riwayat');

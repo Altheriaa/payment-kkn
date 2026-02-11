@@ -21,7 +21,7 @@
             @endif
         </td>
         <td class="align-middle text-center text-sm">
-            <a href={{ route('mahasiswa.detail', $mahasiswa->id) }}>
+            <a href={{ route('mahasiswa.admin.detail', $mahasiswa->id) }}>
                 <span class="badge badge-sm bg-gradient-success"><i
                         class="material-symbols-rounded text-sm ">person</i></span>
             </a>
