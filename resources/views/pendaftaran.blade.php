@@ -12,108 +12,111 @@
                                         @if ($mahasiswa->status_kkn === 'Belum Daftar')
                                             <form action="{{ route('mahasiswa.biodata.update') }}" method="POST" id="biodataForm">
                                                 @csrf
-                                                <div class="row g-3 px-3">
-                                                    <h5>Pendaftaran KKN</h5>
+                                                <div class="row px-3 mt-2">
+                                                    <div class="col-12 mb-4">
+                                                        <h5 class="font-weight-bolder">Pendaftaran KKN</h5>
+                                                        <p class="text-sm text-secondary">Lengkapi biodata di bawah ini dengan benar sebelum menyimpan.</p>
+                                                    </div>
+                                                    
                                                     <!-- No HP -->
-                                                    <div class="col-md-6">
-                                                        <label for="no_hp" class="form-label fw-bold">No HP :</label>
-                                                        <input type="text" class="form-control border" id="no_hp" name="no_hp"
-                                                            value="{{ old('no_hp', $mahasiswa->no_hp) }}"
-                                                            placeholder="Masukkan nomor HP"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="no_hp" class="ms-0">No HP</label>
+                                                            <input type="text" class="form-control" id="no_hp" name="no_hp"
+                                                                value="{{ old('no_hp', $mahasiswa->no_hp) }}"
+                                                                placeholder="Masukkan nomor HP">
+                                                        </div>
                                                     </div>
 
                                                     <!-- No HP Darurat -->
-                                                    <div class="col-md-6">
-                                                        <label for="no_hp_darurat" class="form-label fw-bold">No HP
-                                                            Darurat :</label>
-                                                        <input type="text" class="form-control border" id="no_hp_darurat"
-                                                            name="no_hp_darurat" placeholder=" Masukkan nomor HP darurat" val
-                                                            value="{{ old('no_hp_darurat', $mahasiswa->no_hp_darurat) }}"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="no_hp_darurat" class="ms-0">No HP Darurat</label>
+                                                            <input type="text" class="form-control" id="no_hp_darurat"
+                                                                name="no_hp_darurat" placeholder="Masukkan nomor HP darurat"
+                                                                value="{{ old('no_hp_darurat', $mahasiswa->no_hp_darurat) }}">
+                                                        </div>
                                                     </div>
 
                                                     <!-- Jenis Kelamin -->
-                                                    <div class="col-md-6">
-                                                        <label for="jenis_kelamin" class="form-label fw-bold">Jenis
-                                                            Kelamin :</label>
-                                                        <select class="form-select border" id="jenis_kelamin"
-                                                            name="jenis_kelamin"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
-                                                            <option value="">- Pilih Jenis Kelamin -</option>
-                                                            <option value="L" {{ $mahasiswa->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                                            <option value="P" {{ $mahasiswa->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="jenis_kelamin" class="ms-0">Jenis Kelamin</label>
+                                                            <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                                                                <option value="">- Pilih Jenis Kelamin -</option>
+                                                                <option value="L" {{ $mahasiswa->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                                                                <option value="P" {{ $mahasiswa->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Ukuran Jaket/Rompi -->
-                                                    <div class="col-md-6">
-                                                        <label for="ukuran_jacket_rompi" class="form-label fw-bold">Ukuran
-                                                            Jaket/Rompi :</label>
-                                                        <select class="form-select border" id="ukuran_jacket_rompi"
-                                                            name="ukuran_jacket_rompi"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
-                                                            <option value="">- Pilih Rompi -</option>
-                                                            @foreach(['S', 'M', 'L', 'XL', 'XXL', '3XL'] as $uk)
-                                                                <option value="{{ $uk }}" {{ $mahasiswa->ukuran_jacket_rompi == $uk ? 'selected' : '' }}>
-                                                                    {{ $uk }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="ukuran_jacket_rompi" class="ms-0">Ukuran Jaket/Rompi</label>
+                                                            <select class="form-control" id="ukuran_jacket_rompi" name="ukuran_jacket_rompi">
+                                                                <option value="">- Pilih Rompi -</option>
+                                                                @foreach(['S', 'M', 'L', 'XL', 'XXL', '3XL'] as $uk)
+                                                                    <option value="{{ $uk }}" {{ $mahasiswa->ukuran_jacket_rompi == $uk ? 'selected' : '' }}>
+                                                                        {{ $uk }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Punya Kendaraan -->
-                                                    <div class="col-md-6">
-                                                        <label for="punya_kendaraan" class="form-label fw-bold">Mempunyai kendaraan :</label>
-                                                        <select class="form-select border" id="punya_kendaraan"
-                                                            name="punya_kendaraan"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
-                                                            <option value="">- Kepemilikan Kendaraan -</option>
-                                                            <option value="Punya" {{ $mahasiswa->punya_kendaraan == 'Punya' ? 'selected' : '' }}>Ya</option>
-                                                            <option value="Tidak" {{ $mahasiswa->punya_kendaraan == 'Tidak' ? 'selected' : '' }}>Tidak</option>
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="punya_kendaraan" class="ms-0">Mempunyai Kendaraan</label>
+                                                            <select class="form-control" id="punya_kendaraan" name="punya_kendaraan">
+                                                                <option value="">- Kepemilikan Kendaraan -</option>
+                                                                <option value="Punya" {{ $mahasiswa->punya_kendaraan == 'Punya' ? 'selected' : '' }}>Ya</option>
+                                                                <option value="Tidak" {{ $mahasiswa->punya_kendaraan == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Tipe Kendaraan  -->
-                                                    <div class="col-md-6">
-                                                        <label for="tipe_kendaraan" class="form-label fw-bold">Tipe kendaraan :</label>
-                                                        <select class="form-select border" id="tipe_kendaraan"
-                                                            name="tipe_kendaraan"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
-                                                            <option value="">- Tipe Kendaraan -</option>
-                                                            <option value="Tidak Ada" {{ $mahasiswa->tipe_kendaraan == 'Tidak Ada' ? 'selected' : '' }}>Tidak Ada Kendaraan</option>
-                                                            <option value="Mobil" {{ $mahasiswa->tipe_kendaraan == 'Mobil' ? 'selected' : '' }}>Mobil</option>
-                                                            <option value="Sepeda Motor" {{ $mahasiswa->tipe_kendaraan == 'Sepeda Motor' ? 'selected' : '' }}>Sepeda Motor</option>
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="tipe_kendaraan" class="ms-0">Tipe Kendaraan</label>
+                                                            <select class="form-control" id="tipe_kendaraan" name="tipe_kendaraan">
+                                                                <option value="">- Tipe Kendaraan -</option>
+                                                                <option value="Tidak Ada" {{ $mahasiswa->tipe_kendaraan == 'Tidak Ada' ? 'selected' : '' }}>Tidak Ada Kendaraan</option>
+                                                                <option value="Mobil" {{ $mahasiswa->tipe_kendaraan == 'Mobil' ? 'selected' : '' }}>Mobil</option>
+                                                                <option value="Sepeda Motor" {{ $mahasiswa->tipe_kendaraan == 'Sepeda Motor' ? 'selected' : '' }}>Sepeda Motor</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Punya Lisensi  -->
-                                                    <div class="col-md-6">
-                                                        <label for="punya_lisensi" class="form-label fw-bold">Mempunyai Lisensi :</label>
-                                                        <select class="form-select border" id="punya_lisensi"
-                                                            name="punya_lisensi"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
-                                                            <option value="">- Pilih Lisensi -</option>
-                                                            @foreach(['Tidak Ada', 'SIM A', 'SIM B', 'SIM C', 'Lainnya'] as $lisensi)
-                                                                <option value="{{ $lisensi }}" {{ $mahasiswa->punya_lisensi == $lisensi ? 'selected' : '' }}>
-                                                                    {{ $lisensi }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="punya_lisensi" class="ms-0">Mempunyai Lisensi</label>
+                                                            <select class="form-control" id="punya_lisensi" name="punya_lisensi">
+                                                                <option value="">- Pilih Lisensi -</option>
+                                                                @foreach(['Tidak Ada', 'SIM A', 'SIM B', 'SIM C', 'Lainnya'] as $lisensi)
+                                                                    <option value="{{ $lisensi }}" {{ $mahasiswa->punya_lisensi == $lisensi ? 'selected' : '' }}>
+                                                                        {{ $lisensi }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Keahlian -->
-                                                    <div class="col-md-6">
-                                                        <label for="keahlian" class="form-label fw-bold">Keahlian :</label>
-                                                        <input type="text" class="form-control border" id="keahlian"
-                                                            name="keahlian"
-                                                            value="{{ old('keahlian', $mahasiswa->keahlian) }}" placeholder="Masukkan keahlian"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;">
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="keahlian" class="ms-0">Keahlian Tambahan</label>
+                                                            <input type="text" class="form-control" id="keahlian" name="keahlian"
+                                                                value="{{ old('keahlian', $mahasiswa->keahlian) }}" placeholder="Contoh: Desain Grafis, Menulis, dll">
+                                                        </div>
                                                     </div>
 
                                                     <!-- Tombol Submit -->
-                                                    <div class="col-12 text-end mt-4">
-                                                        <button type="submit" class="btn bg-gradient-dark px-3">
+                                                    <div class="col-12 text-end mt-2 mb-1">
+                                                        <button type="submit" class="btn bg-gradient-dark px-4 py-2">
                                                             <i class="material-symbols-rounded text-white me-2">save</i>Simpan Biodata
                                                         </button>
                                                     </div>
@@ -122,116 +125,111 @@
                                         @else   
                                             <form action="" method="POST" id="biodataForm">
                                                 @csrf
-                                                <div class="row g-3 px-3">
-                                                    <h5>Pendaftaran KKN</h5>
+                                                <div class="row px-3 mt-2">
+                                                    <div class="col-12 mb-4">
+                                                        <h5 class="font-weight-bolder">Pendaftaran KKN</h5>
+                                                        <p class="text-sm text-secondary">Biodata Anda telah disimpan dan tidak dapat diubah lagi.</p>
+                                                    </div>
+                                                    
                                                     <!-- No HP -->
-                                                    <div class="col-md-6">
-                                                        <label for="no_hp" class="form-label fw-bold">No HP :</label>
-                                                        <input type="text" class="form-control border" id="no_hp" name="no_hp"
-                                                            value="{{ old('no_hp', $mahasiswa->no_hp) }}"
-                                                            placeholder="Masukkan nomor HP"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="no_hp" class="ms-0">No HP</label>
+                                                            <input type="text" class="form-control" id="no_hp" name="no_hp"
+                                                                value="{{ old('no_hp', $mahasiswa->no_hp) }}"
+                                                                placeholder="Masukkan nomor HP" disabled>
+                                                        </div>
                                                     </div>
 
                                                     <!-- No HP Darurat -->
-                                                    <div class="col-md-6">
-                                                        <label for="no_hp_darurat" class="form-label fw-bold">No HP
-                                                            Darurat :</label>
-                                                        <input type="text" class="form-control border" id="no_hp_darurat"
-                                                            name="no_hp_darurat" placeholder=" Masukkan nomor HP darurat" val
-                                                            value="{{ old('no_hp_darurat', $mahasiswa->no_hp_darurat) }}"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="no_hp_darurat" class="ms-0">No HP Darurat</label>
+                                                            <input type="text" class="form-control" id="no_hp_darurat"
+                                                                name="no_hp_darurat" placeholder="Masukkan nomor HP darurat"
+                                                                value="{{ old('no_hp_darurat', $mahasiswa->no_hp_darurat) }}" disabled>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Jenis Kelamin -->
-                                                    <div class="col-md-6">
-                                                        <label for="jenis_kelamin" class="form-label fw-bold">Jenis
-                                                            Kelamin :</label>
-                                                        <select class="form-select border" id="jenis_kelamin"
-                                                            name="jenis_kelamin"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
-                                                            <option value="">- Pilih Jenis Kelamin -</option>
-                                                            <option value="L" {{ $mahasiswa->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                                            <option value="P" {{ $mahasiswa->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="jenis_kelamin" class="ms-0">Jenis Kelamin</label>
+                                                            <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" disabled>
+                                                                <option value="">- Pilih Jenis Kelamin -</option>
+                                                                <option value="L" {{ $mahasiswa->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                                                                <option value="P" {{ $mahasiswa->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Ukuran Jaket/Rompi -->
-                                                    <div class="col-md-6">
-                                                        <label for="ukuran_jacket_rompi" class="form-label fw-bold">Ukuran
-                                                            Jaket/Rompi :</label>
-                                                        <select class="form-select border" id="ukuran_jacket_rompi"
-                                                            name="ukuran_jacket_rompi"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
-                                                            <option value="">- Pilih Rompi -</option>
-                                                            @foreach(['S', 'M', 'L', 'XL', 'XXL', '3XL'] as $uk)
-                                                                <option value="{{ $uk }}" {{ $mahasiswa->ukuran_jacket_rompi == $uk ? 'selected' : '' }}>
-                                                                    {{ $uk }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="ukuran_jacket_rompi" class="ms-0">Ukuran Jaket/Rompi</label>
+                                                            <select class="form-control" id="ukuran_jacket_rompi" name="ukuran_jacket_rompi" disabled>
+                                                                <option value="">- Pilih Rompi -</option>
+                                                                @foreach(['S', 'M', 'L', 'XL', 'XXL', '3XL'] as $uk)
+                                                                    <option value="{{ $uk }}" {{ $mahasiswa->ukuran_jacket_rompi == $uk ? 'selected' : '' }}>
+                                                                        {{ $uk }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Punya Kendaraan -->
-                                                    <div class="col-md-6">
-                                                        <label for="punya_kendaraan" class="form-label fw-bold">Mempunyai kendaraan :</label>
-                                                        <select class="form-select border" id="punya_kendaraan"
-                                                            name="punya_kendaraan"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
-                                                            <option value="">- Kepemilikan Kendaraan -</option>
-                                                            <option value="Punya" {{ $mahasiswa->punya_kendaraan == 'Punya' ? 'selected' : '' }}>Ya</option>
-                                                            <option value="Tidak" {{ $mahasiswa->punya_kendaraan == 'Tidak' ? 'selected' : '' }}>Tidak</option>
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="punya_kendaraan" class="ms-0">Mempunyai Kendaraan</label>
+                                                            <select class="form-control" id="punya_kendaraan" name="punya_kendaraan" disabled>
+                                                                <option value="">- Kepemilikan Kendaraan -</option>
+                                                                <option value="Punya" {{ $mahasiswa->punya_kendaraan == 'Punya' ? 'selected' : '' }}>Ya</option>
+                                                                <option value="Tidak" {{ $mahasiswa->punya_kendaraan == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Tipe Kendaraan  -->
-                                                    <div class="col-md-6">
-                                                        <label for="tipe_kendaraan" class="form-label fw-bold">Tipe kendaraan :</label>
-                                                        <select class="form-select border" id="tipe_kendaraan"
-                                                            name="tipe_kendaraan"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
-                                                            <option value="">- Kepemilikan Kendaraan -</option>
-                                                            <option value="Tidak Ada" {{ $mahasiswa->tipe_kendaraan == 'Tidak Ada' ? 'selected' : '' }}>Mobil</option>
-                                                            <option value="Mobil" {{ $mahasiswa->tipe_kendaraan == 'Mobil' ? 'selected' : '' }}>Mobil</option>
-                                                            <option value="Sepeda Motor" {{ $mahasiswa->tipe_kendaraan == 'Sepeda Motor' ? 'selected' : '' }}>Sepeda Motor</option>
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="tipe_kendaraan" class="ms-0">Tipe Kendaraan</label>
+                                                            <select class="form-control" id="tipe_kendaraan" name="tipe_kendaraan" disabled>
+                                                                <option value="">- Tipe Kendaraan -</option>
+                                                                <option value="Tidak Ada" {{ $mahasiswa->tipe_kendaraan == 'Tidak Ada' ? 'selected' : '' }}>Tidak Ada Kendaraan</option>
+                                                                <option value="Mobil" {{ $mahasiswa->tipe_kendaraan == 'Mobil' ? 'selected' : '' }}>Mobil</option>
+                                                                <option value="Sepeda Motor" {{ $mahasiswa->tipe_kendaraan == 'Sepeda Motor' ? 'selected' : '' }}>Sepeda Motor</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Punya Lisensi  -->
-                                                    <div class="col-md-6">
-                                                        <label for="punya_lisensi" class="form-label fw-bold">Mempunyai Lisensi :</label>
-                                                        <select class="form-select border" id="punya_lisensi"
-                                                            name="punya_lisensi"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
-                                                            <option value="">- Pilih Lisensi -</option>
-                                                            @foreach(['Tidak Ada', 'SIM A', 'SIM B', 'SIM C', 'Lainnya'] as $lisensi)
-                                                                <option value="{{ $lisensi }}" {{ $mahasiswa->punya_lisensi == $lisensi ? 'selected' : '' }}>
-                                                                    {{ $lisensi }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="punya_lisensi" class="ms-0">Mempunyai Lisensi</label>
+                                                            <select class="form-control" id="punya_lisensi" name="punya_lisensi" disabled>
+                                                                <option value="">- Pilih Lisensi -</option>
+                                                                @foreach(['Tidak Ada', 'SIM A', 'SIM B', 'SIM C', 'Lainnya'] as $lisensi)
+                                                                    <option value="{{ $lisensi }}" {{ $mahasiswa->punya_lisensi == $lisensi ? 'selected' : '' }}>
+                                                                        {{ $lisensi }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Keahlian -->
-                                                    <div class="col-md-6">
-                                                        <label for="keahlian" class="form-label fw-bold">Keahlian :</label>
-                                                        <input type="text" class="form-control border" id="keahlian"
-                                                            name="keahlian"
-                                                            value="{{ old('keahlian', $mahasiswa->keahlian) }}" placeholder="Masukkan keahlian"
-                                                            style="border: 1px solid #d2d6da !important; padding: 0.5rem 0.75rem;"
-                                                            disabled>
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="input-group input-group-static">
+                                                            <label for="keahlian" class="ms-0">Keahlian Tambahan</label>
+                                                            <input type="text" class="form-control" id="keahlian" name="keahlian"
+                                                                value="{{ old('keahlian', $mahasiswa->keahlian) }}" placeholder="Contoh: Desain Grafis, Menulis, dll" disabled>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Tombol Submit -->
-                                                    <div class="col-12 text-end mt-4">
-                                                        <button type="submit" class="btn bg-gradient-dark px-3 text-white" disabled>
+                                                    <div class="col-12 text-end mt-2 mb-1">
+                                                        <button type="submit" class="btn bg-gradient-dark px-4 py-2" disabled>
                                                             <i class="material-symbols-rounded text-white me-2">save</i>Simpan Biodata
                                                         </button>
                                                     </div>
